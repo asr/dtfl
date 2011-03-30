@@ -24,7 +24,7 @@ open import Lib.Data.Product
 ------------------------------------------------------------------------------
 
 -- Motivation: Problems in the definition of some Haskell functions
--- (from GHC 7.0.3 module Data.List)
+-- (from Data.List (GHC 7.0.3))
 
 -- | Extract the first element of a list, which must be non-empty.
 -- head                    :: [a] -> a

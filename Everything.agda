@@ -14,6 +14,7 @@ open import Lib.Data.Nat.Induction.WellFounded
 open import Lib.Data.Nat.Properties
 open import Lib.Data.Product
 open import Lib.Data.Unit
+open import Lib.Data.Vec
 
 open import Lib.Function
 

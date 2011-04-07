@@ -21,7 +21,7 @@ open import Lib.Data.Nat
 -- * We have a proof of mathematical induction!
 
 indℕ : (P : ℕ → Set) →
-       P 0 →
+       P zero →
        (∀ n → P n → P (succ n)) →
        ∀ n → P n
 indℕ P P0 istep zero     = P0

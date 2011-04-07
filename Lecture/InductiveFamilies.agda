@@ -80,7 +80,7 @@ tail (x ∷ xs) = xs
 -- Using the inductive familiy of vectors we can express that two list
 -- are the same length.
 zip : {A B : Set}(n : ℕ) → Vec A n → Vec B n → Vec (A × B) n
-zip .0        []             []       = []
+zip .zero     []             []       = []
 zip .(succ n) (_∷_ {n} x xs) (y ∷ ys) = (x , y) ∷ zip n xs ys
 
 ------------------------------------------------------------------------------

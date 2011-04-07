@@ -58,7 +58,7 @@ record Monoid : Set₁ where
   { Carrier       = ℕ
   ; _∙_           = _+_
   ; ∙-assoc       = +-assoc
-  ; ε             = 0
+  ; ε             = zero
   ; leftIdentity  = +-leftIdentity
   ; rightIdentity = +-rightIdentity
   }

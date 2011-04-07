@@ -14,10 +14,6 @@ data ℕ : Set where
   zero : ℕ
   succ : ℕ → ℕ
 
-{-# BUILTIN NATURAL ℕ     #-}
-{-# BUILTIN ZERO    zero  #-}
-{-# BUILTIN SUC     succ  #-}
-
 data _≤_ : ℕ → ℕ → Set where
   z≤n : ∀ {n} →           zero   ≤ n
   s≤s : ∀ {m n} → m ≤ n → succ m ≤ succ n

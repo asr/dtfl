@@ -19,5 +19,5 @@ _++_ : {A : Set} → List A → List A → List A
 (x ∷ xs) ++ ys = x ∷ (xs ++ ys)
 
 length : {A : Set} → List A → ℕ
-length []       = 0
-length (x ∷ xs) = 1 + length xs
+length []       = zero
+length (x ∷ xs) = (succ zero) + length xs

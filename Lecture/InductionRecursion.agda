@@ -27,13 +27,13 @@ open import Lib.Relation.Binary.PropositionalEquality
 -- B. Using the identity type (see Lib.Relation.Binary.PropositionalEquality).
 
 -- Example: x + 0 = x using mathematical induction.
-+-rightIdentity₁ : ∀ n → n + 0 ≡ n
++-rightIdentity₁ : ∀ n → n + zero ≡ n
 +-rightIdentity₁ n = indℕ P P0 is n
   where
     P : ℕ → Set
-    P i = i + 0 ≡ i
+    P i = i + zero ≡ i
 
-    P0 : P 0
+    P0 : P zero
     P0 = refl
 
     is : ∀ i → P i → P (succ i)
@@ -52,7 +52,7 @@ open import Lib.Relation.Binary.PropositionalEquality
     P : ℕ → Set
     P i = i + n + o ≡ i + (n + o)
 
-    P0 : P 0
+    P0 : P zero
     P0 = refl
 
     is : ∀ i → P i → P (succ i)
@@ -67,11 +67,11 @@ open import Lib.Relation.Binary.PropositionalEquality
 -- See Lib.Data.Nat.Induction.WellFounded.wfIndℕ
 
 -- Example: x + 0 = x using mathematical induction.
-+-rightIdentity₂ : ∀ n → n + 0 ≡ n
++-rightIdentity₂ : ∀ n → n + zero ≡ n
 +-rightIdentity₂ n = wfIndℕ P ih n
   where
     P : ℕ → Set
-    P x = x + 0 ≡ x
+    P x = x + zero ≡ x
 
     ih : ∀ y → (∀ x → x < y → P x) → P y
     ih zero     _ = refl

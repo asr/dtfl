@@ -19,10 +19,10 @@ open import Lib.Relation.Binary.PropositionalEquality
 ≤-trans z≤n       _         = z≤n
 ≤-trans (s≤s m≤n) (s≤s n≤o) = s≤s (≤-trans m≤n n≤o)
 
-+-leftIdentity : (n : ℕ) → 0 + n ≡ n
++-leftIdentity : (n : ℕ) → zero + n ≡ n
 +-leftIdentity n = refl
 
-+-rightIdentity : ∀ n → n + 0 ≡ n
++-rightIdentity : ∀ n → n + zero ≡ n
 +-rightIdentity zero     = refl
 +-rightIdentity (succ n) = cong succ ( +-rightIdentity n)
 

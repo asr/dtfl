@@ -127,7 +127,7 @@ sortS (x ∷ xs) = l , l-Sorted , x∷xs≡l
     x∷xs≡l : x ∷ xs ≙ l
     x∷xs≡l = ≙-trans (x ∷ xs) (x ∷ xs') l x∷xs≙x∷xs' x∷xs'≙l
 
--- Testing
+-- Examples
 -- For example, using C-c C-n normalize sortW l₃ and sortS l₃
 -- and see the difference.
 l₁ : List ℕ

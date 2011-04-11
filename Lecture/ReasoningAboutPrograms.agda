@@ -15,10 +15,11 @@ open import Data.Vec
 
 open import Function
 
+open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
-open ≡-Reasoning
 open import Relation.Nullary
 open import Relation.Nullary.Decidable
+import Relation.Binary.PreorderReasoning as Pre
 
 infix 4 _≙_
 
@@ -43,7 +44,6 @@ appendV .(succ m) n (_∷_ {m} x xs) ys = x ∷ appendV m n xs ys
 ¬x≤y→y≤x {m}      {zero}     _     = z≤n
 ¬x≤y→y≤x {zero}   {succ n} ¬m≤Sn = ⊥-elim (¬m≤Sn z≤n)
 ¬x≤y→y≤x {succ m} {succ n} ¬m≤Sn = s≤s (¬x≤y→y≤x (λ m≤n → ¬m≤Sn (s≤s m≤n)))
-
 
 -- Weak specification
 
@@ -99,6 +99,30 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 ≙-trans : ∀ xs ys zs → xs ≙ ys → ys ≙ zs → xs ≙ zs
 ≙-trans xs ys zs xs≙ys ys≙zs n = trans (xs≙ys n) (ys≙zs n)
 
+≙-isEquivalance : IsEquivalence _≙_
+≙-isEquivalance = record
+  { refl  = λ {xs}           → ≙-refl xs
+  ; sym   = λ {xs} {ys}      → ≙-sym xs ys
+  ; trans = λ {xs} {ys} {zs} → ≙-trans xs ys zs
+  }
+
+-- The relation "to have the same elements" is a preorder.
+
+≙-isPreorder : IsPreorder _≙_ _≙_
+≙-isPreorder = record
+  { isEquivalence = ≙-isEquivalance
+  ; reflexive     = id
+  ; trans         = λ {xs} {ys} {zs} → ≙-trans xs ys zs
+  }
+
+≙-Preorder : Preorder _ _ _
+≙-Preorder = record
+  { Carrier    = List ℕ
+  ;  _≈_       = _≙_
+  ;  _∼_       = _≙_
+  ; isPreorder = ≙-isPreorder
+  }
+
 -- Some properties of the relation "to have the same elements"
 
 -- Version using pattern matching in z ≟ n
@@ -111,6 +135,9 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 ≙-∷ z xs≙ys n with n ≟ z
 ≙-∷ z xs≙ys n | yes _ = cong succ (xs≙ys n)
 ≙-∷ z xs≙ys n | no  _ = xs≙ys n
+
+postulate
+  ≙-perm : ∀ n n' xs ys → xs ≙ ys → n ∷ n' ∷ xs ≙ n' ∷ n ∷ ys
 
 -- Some properties of insert.
 
@@ -131,8 +158,22 @@ insertSorted {(x ∷ xs)} n s with n ≤? x
 ... | yes p = sorted-∷ p s
 ... | no ¬p = insertSortedHelper (¬x≤y→y≤x ¬p) s (insertSorted n (tailSorted s))
 
-postulate
-  insert-≙     : ∀ xs n → insert n xs ≙ n ∷ xs
+insert-≙ : ∀ xs n → insert n xs ≙ n ∷ xs
+insert-≙ []       n = λ _ → refl
+insert-≙ (x ∷ xs) n with n ≤? x
+... | yes p = λ _ → refl
+... | no ¬p = prf
+  where
+    prf : x ∷ insert n xs ≙ n ∷ x ∷ xs
+    prf =
+      begin
+        x ∷ insert n xs
+          ≈⟨ ≙-∷ x (insert-≙ xs n) ⟩
+        x ∷ n ∷ xs
+          ≈⟨ ≙-perm x n xs xs (≙-refl xs) ⟩
+        n ∷ x ∷ xs
+      ∎
+      where open Pre ≙-Preorder
 
 -- The insert sort.
 sortS : (xs : List ℕ) → Σ (List ℕ) (λ ys → Sorted ys × xs ≙ ys)

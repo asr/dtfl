@@ -136,8 +136,24 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 ≙-∷ z xs≙ys n | yes _ = cong succ (xs≙ys n)
 ≙-∷ z xs≙ys n | no  _ = xs≙ys n
 
-postulate
-  ≙-perm : ∀ n n' xs ys → xs ≙ ys → n ∷ n' ∷ xs ≙ n' ∷ n ∷ ys
+≙-perm : ∀ n₁ n₂ {xs} {ys} → xs ≙ ys → n₁ ∷ n₂ ∷ xs ≙ n₂ ∷ n₁ ∷ ys
+≙-perm n₁  n₂ h n   with n ≟ n₁ | n ≟ n₂
+≙-perm .n₂ n₂ h .n₂ | yes refl | yes refl = cong succ (≙-∷ n₂ h n₂)
+≙-perm n₁  n₂ h .n₁ | yes refl | no  ¬p   with n₁ ≟ n₂
+≙-perm n₂  _  h .n₂ | yes refl | no  ¬p   | yes p = ⊥-elim (¬p p)
+≙-perm n₂  _  h .n₂ | yes refl | no  ¬p'  | no  ¬p  with n₂ ≟ n₂
+≙-perm n₂  _  h .n₂ | yes refl | no  ¬p'  | no  ¬p  | yes refl = cong succ (h n₂)
+≙-perm n₂  _  h .n₂ | yes refl | no  ¬p0  | no  ¬p' | no  ¬p   = ⊥-elim (¬p refl)
+≙-perm n₁  n₂ h .n₂ | no  ¬p   | yes refl with n₂ ≟ n₂
+≙-perm n₂  n₃ h ._  | no  ¬p   | yes refl | yes refl with n₃ ≟ n₂
+≙-perm n₃  _  h ._  | no  ¬p   | yes refl | yes refl | yes p  = ⊥-elim (¬p p)
+≙-perm n₃  n₄ h ._  | no  ¬p'  | yes refl | yes refl | no  ¬p = cong succ (h n₄)
+≙-perm n₂  _  h ._  | no  ¬p'  | yes refl | no  ¬p = ⊥-elim (¬p refl)
+≙-perm n₁  n₂ h n   | no  ¬p   | no  ¬p'  with n ≟ n₂
+≙-perm n₁  n₂ h .n₂ | no  ¬p   | no  ¬p'  | yes refl = ⊥-elim (¬p' refl)
+≙-perm n₁  n₂ h n   | no  ¬p'  | no  ¬p0  | no  ¬p  with n ≟ n₁
+≙-perm n₁  n₂ h .n₁ | no  ¬p'  | no  ¬p0  | no  ¬p  | yes refl = ⊥-elim (¬p' refl)
+≙-perm n₁  n₂ h n   | no  ¬p0  | no  ¬p1  | no  ¬p' | no  ¬p   = h n
 
 -- Some properties of insert.
 
@@ -170,7 +186,7 @@ insert-≙ (x ∷ xs) n with n ≤? x
         x ∷ insert n xs
           ≈⟨ ≙-∷ x (insert-≙ xs n) ⟩
         x ∷ n ∷ xs
-          ≈⟨ ≙-perm x n xs xs (≙-refl xs) ⟩
+          ≈⟨ ≙-perm x n (≙-refl xs) ⟩
         n ∷ x ∷ xs
       ∎
       where open Pre ≙-Preorder

@@ -20,7 +20,7 @@ open ≡-Reasoning
 open import Relation.Nullary
 open import Relation.Nullary.Decidable
 
-infix 4 _≙_ _≣_
+infix 4 _≙_
 
 ------------------------------------------------------------------------------
 -- Example: The append function
@@ -70,11 +70,9 @@ occ n (x ∷ xs) with n ≟ x
 ... | yes _ = 1 + occ n xs
 ... | no _  = occ n xs
 
+--- The relation "to have the same elements".
 _≙_ : List ℕ → List ℕ → Set
 xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
-
-data _≣_ : List ℕ → List ℕ → Set where
-  ≣-are : ∀ xs ys n → occ n xs ≡ occ n ys → xs ≣ ys
 
 -- The relation "to have the same elements" is a relation of equivalence.
 

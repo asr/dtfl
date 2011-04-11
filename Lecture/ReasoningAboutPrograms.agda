@@ -37,6 +37,14 @@ appendV .(succ m) n (_∷_ {m} x xs) ys = x ∷ appendV m n xs ys
 ------------------------------------------------------------------------------
 -- Example: Sorting a list (using insert sort)
 
+-- Auxiliary properties
+
+¬x≤y→y≤x : ∀ {m n}  → ¬ (m ≤ n) → n ≤ m
+¬x≤y→y≤x {m}      {zero}     _     = z≤n
+¬x≤y→y≤x {zero}   {succ n} ¬m≤Sn = ⊥-elim (¬m≤Sn z≤n)
+¬x≤y→y≤x {succ m} {succ n} ¬m≤Sn = s≤s (¬x≤y→y≤x (λ m≤n → ¬m≤Sn (s≤s m≤n)))
+
+
 -- Weak specification
 
 -- Insert an element in an already sorted list.
@@ -62,6 +70,12 @@ data Sorted : List ℕ → Set where
   sorted-[] :                                        Sorted []
   sorted-x  : ∀ n →                                  Sorted (n ∷ [])
   sorted-∷  : ∀ {m n xs} → m ≤ n → Sorted (n ∷ xs) → Sorted (m ∷ n ∷ xs)
+
+-- Some properties of the relation Sorted.
+
+tailSorted : ∀ {x} {xs} → Sorted (x ∷ xs) → Sorted xs
+tailSorted {x} (sorted-x .x) = sorted-[]
+tailSorted (sorted-∷ h₁ h₂)  = h₂
 
 -- Number of times that occurs a number in a list.
 occ : ℕ → List ℕ → ℕ
@@ -100,8 +114,24 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 
 -- Some properties of insert.
 
+insertSortedHelper : ∀ {n} {x} {xs} →
+                     x ≤ n →
+                     Sorted (x ∷ xs) →
+                     Sorted (insert n xs) →
+                     Sorted (x ∷ insert n xs)
+insertSortedHelper {n} {x} {[]}      h₁ h₂ h₃ = sorted-∷ h₁ (sorted-x n)
+insertSortedHelper {n} {x} {x' ∷ xs} h₁ h₂ h₃ with n ≤? x'
+... | yes p = sorted-∷ h₁ h₃
+insertSortedHelper {n} {x} {x' ∷ xs} h₁ (sorted-∷ x≤x' h₂) h₃ | no ¬p =
+  sorted-∷ x≤x' h₃
+
+insertSorted : ∀ {xs} n → Sorted xs → Sorted (insert n xs)
+insertSorted {[]} n s = sorted-x n
+insertSorted {(x ∷ xs)} n s with n ≤? x
+... | yes p = sorted-∷ p s
+... | no ¬p = insertSortedHelper (¬x≤y→y≤x ¬p) s (insertSorted n (tailSorted s))
+
 postulate
-  insertSorted : ∀ {xs} n → Sorted xs → Sorted (insert n xs)
   insert-≙     : ∀ xs n → insert n xs ≙ n ∷ xs
 
 -- The insert sort.

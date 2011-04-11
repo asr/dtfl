@@ -6,8 +6,9 @@
 
 module Lecture.ReasoningAboutPrograms where
 
-open import Data.Bool
-open import Data.Nat as Nat renaming (suc to succ)
+open import Data.Bool hiding ( _≟_ )
+open import Data.Empty
+open import Data.Nat renaming (suc to succ)
 open import Data.Product
 open import Data.List as List
 open import Data.Vec
@@ -15,10 +16,11 @@ open import Data.Vec
 open import Function
 
 open import Relation.Binary.PropositionalEquality
+open ≡-Reasoning
 open import Relation.Nullary
 open import Relation.Nullary.Decidable
 
-infix 4 _≙_
+infix 4 _≙_ _≣_
 
 ------------------------------------------------------------------------------
 -- Example: The append function
@@ -64,13 +66,15 @@ data Sorted : List ℕ → Set where
 -- Number of times that occurs a number in a list.
 occ : ℕ → List ℕ → ℕ
 occ n []       = 0
-occ n (x ∷ xs) with Nat._≟_ n x
+occ n (x ∷ xs) with n ≟ x
 ... | yes _ = 1 + occ n xs
 ... | no _  = occ n xs
 
--- The relation "to have the same elements".
 _≙_ : List ℕ → List ℕ → Set
 xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
+
+data _≣_ : List ℕ → List ℕ → Set where
+  ≣-are : ∀ xs ys n → occ n xs ≡ occ n ys → xs ≣ ys
 
 -- The relation "to have the same elements" is a relation of equivalence.
 
@@ -85,8 +89,16 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 
 -- Some properties of the relation "to have the same elements"
 
-postulate
-  ≙-∷ : ∀ n {xs ys} → xs ≙ ys → n ∷ xs ≙ n ∷ ys
+-- Version using pattern matching in z ≟ n
+-- ≙-∷' : ∀ z {xs ys} → xs ≙ ys → z ∷ xs ≙ z ∷ ys
+-- ≙-∷' z xs≙ys n with z ≟ n
+-- ... | yes p = {!!}
+-- ... | no ¬p = {!!}
+
+≙-∷ : ∀ z {xs ys} → xs ≙ ys → z ∷ xs ≙ z ∷ ys
+≙-∷ z xs≙ys n with n ≟ z
+≙-∷ z xs≙ys n | yes _ = cong succ (xs≙ys n)
+≙-∷ z xs≙ys n | no  _ = xs≙ys n
 
 -- Some properties of insert.
 

@@ -4,7 +4,7 @@
 -- Example: Weak/strong specification of sorting a list (using insert sort)
 ------------------------------------------------------------------------------
 
-module Lecture.ReasoningAboutPrograms.Sort where
+module Lecture.ReasoningAboutPrograms.InsertSort where
 
 open import Data.Empty
 open import Data.Nat renaming (suc to succ)

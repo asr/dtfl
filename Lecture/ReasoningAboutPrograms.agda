@@ -24,4 +24,4 @@ appendV .(succ m) n (_∷_ {m} x xs) ys = x ∷ appendV m n xs ys
 
 ------------------------------------------------------------------------------
 -- Example: Sorting a list (using insert sort)
--- See Lecture.ReasoningAboutPrograms.Sort
+-- See Lecture.ReasoningAboutPrograms.InsertSort

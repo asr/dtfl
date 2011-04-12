@@ -30,6 +30,12 @@ insert n (x ∷ xs) with n ≤? x
 ... | yes _ = n ∷ x ∷ xs
 ... | no  _ = x ∷ insert n xs
 
+insertEg₁ : List ℕ
+insertEg₁ = insert 4 (2 ∷ 5 ∷ [])
+
+insertEg₂ : List ℕ
+insertEg₂ = insert 4 (24 ∷ 50 ∷ [])
+
 -- The insert sort.
 sortW : List ℕ → List ℕ
 sortW []       = []
@@ -54,6 +60,12 @@ data Sorted : List ℕ → Set where
   sorted-x  : ∀ n →                                  Sorted (n ∷ [])
   sorted-∷  : ∀ {m n xs} → m ≤ n → Sorted (n ∷ xs) → Sorted (m ∷ n ∷ xs)
 
+2357-sorted : Sorted (2 ∷ 3 ∷ 5 ∷ 7 ∷ []) -- Via Agsy.
+2357-sorted = sorted-∷ (s≤s (s≤s z≤n))
+                (sorted-∷ (s≤s (s≤s (s≤s z≤n)))
+                 (sorted-∷ (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))
+                  (sorted-x (succ (succ (succ (succ (succ (succ (succ zero))))))))))
+
 -- Some properties of the relation Sorted.
 
 tailSorted : ∀ {x} {xs} → Sorted (x ∷ xs) → Sorted xs
@@ -67,7 +79,13 @@ occ n (x ∷ xs) with n ≟ x
 ... | yes _ = 1 + occ n xs
 ... | no _  = occ n xs
 
---- The relation "to have the same elements".
+occEg₁ : ℕ
+occEg₁ = occ 3 (3 ∷ 7 ∷ 3 ∷ [])
+
+occEg₂ : ℕ
+occEg₂ = occ 36725 (3 ∷ 7 ∷ 3 ∷ [])
+
+-- The relation "to have the same elements".
 _≙_ : List ℕ → List ℕ → Set
 xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 

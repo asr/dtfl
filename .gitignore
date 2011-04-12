@@ -1,3 +1,4 @@
 *.agdai
 html
 Makefile
+Lecture/ReasoningAboutPrograms/*.hs

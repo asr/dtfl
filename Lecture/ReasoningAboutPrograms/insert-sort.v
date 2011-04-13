@@ -163,9 +163,7 @@ Defined.
 (* The sortS proof term *)
 Print sortS.
 
-
-Eval compute in (sortS (3 :: 7 :: 3 :: nil)).
-
+Eval compute in (sortS (4 :: 1 :: 3 :: 5 :: 2 :: nil)).
 
 (* Code extraction *)
 Extraction Language Haskell.

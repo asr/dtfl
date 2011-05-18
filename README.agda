@@ -20,3 +20,4 @@ open import Lecture.LeibnizEquality
 open import Lecture.InductiveFamilies
 open import Lecture.ReasoningAboutPrograms
 open import Lecture.ReasoningAboutPrograms.InsertSort
+open import Lecture.GeneralRecursion

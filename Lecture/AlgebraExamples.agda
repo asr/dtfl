@@ -10,7 +10,7 @@ open import Data.Nat
 
 open import Extra.Data.Nat.Properties
 
-open import Extra.Function
+open import Function
 
 open import Extra.Relation.Binary.PropositionalEquality
 open import Extra.Relation.Binary.PreorderReasoning

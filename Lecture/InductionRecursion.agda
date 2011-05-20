@@ -69,7 +69,7 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- Example: x + 0 = x using mathematical induction.
 +-rightIdentity₂ : ∀ n → n + zero ≡ n
-+-rightIdentity₂ n = wfIndℕ P ih n
++-rightIdentity₂ n = wfIndℕ-< P ih n
   where
     P : ℕ → Set
     P x = x + zero ≡ x

@@ -11,9 +11,7 @@ open import Data.Nat
 open import Data.Nat.Properties
 
 open import Extra.Data.Nat.Properties
-
-open import Induction
-open import Induction.Nat
+open import Extra.Data.Nat.Induction.WellFounded
 
 open import Relation.Nullary
 
@@ -179,12 +177,12 @@ nestD-≤′ .(suc n) (nestDomS {n} h₁ h₂) =
 
 -- The nest function is total.
 allNestDom : ∀ n → NestDom n
-allNestDom = build <-rec-builder P ih
+allNestDom = wfIndℕ-<′ P ih
   where
     P : ℕ → Set
     P = NestDom
 
-    ih : ∀ y → <-Rec P y → P y
+    ih : ∀ y → (∀ x → x <′ y → P x) → P y
     ih zero    rec = nestDom0
     ih (suc y) rec = nestDomS nd-y (rec (nestD y nd-y) (s≤′s (nestD-≤′ y nd-y)))
         where

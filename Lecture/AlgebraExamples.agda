@@ -6,13 +6,14 @@
 
 module Lecture.AlgebraExamples where
 
-open import Lib.Data.Nat
-open import Lib.Data.Nat.Properties
+open import Data.Nat
 
-open import Lib.Function
+open import Extra.Data.Nat.Properties
 
-open import Lib.Relation.Binary.PropositionalEquality
-open import Lib.Relation.Binary.PreorderReasoning
+open import Extra.Function
+
+open import Extra.Relation.Binary.PropositionalEquality
+open import Extra.Relation.Binary.PreorderReasoning
 
 ------------------------------------------------------------------------------
 -- Semigroup (S,*) where

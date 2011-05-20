@@ -8,9 +8,9 @@
 -- proof, and _∎, which ends a proof. In fact, these combinators work
 -- for arbitrary preorders.
 
-module Lib.Relation.Binary.PreorderReasoning where
+module Extra.Relation.Binary.PreorderReasoning where
 
-open import Lib.Relation.Binary.PropositionalEquality
+open import Extra.Relation.Binary.PropositionalEquality
 
 -- We add 3 to the fixities of the standard library.
 infix 7 _≃_

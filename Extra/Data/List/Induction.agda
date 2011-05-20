@@ -2,9 +2,9 @@
 -- Induction on lists
 ------------------------------------------------------------------------------
 
-module Lib.Data.List.Induction where
+module Extra.Data.List.Induction where
 
-open import Lib.Data.List
+open import Data.List
 
 ------------------------------------------------------------------------------
 -- Induction principle on lists.

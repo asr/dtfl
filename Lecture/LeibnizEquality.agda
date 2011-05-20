@@ -6,7 +6,7 @@
 
 module Lecture.LeibnizEquality where
 
-open import Lib.Relation.Binary.PropositionalEquality
+open import Extra.Relation.Binary.PropositionalEquality
 
 ------------------------------------------------------------------------------
 -- Introduction

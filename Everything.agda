@@ -4,22 +4,19 @@
 
 module Everything where
 
--- Library
-open import Lib.Data.List
-open import Lib.Data.List.Induction
-open import Lib.Data.List.Properties
-open import Lib.Data.Nat
-open import Lib.Data.Nat.Induction.MathematicalInduction
-open import Lib.Data.Nat.Induction.WellFounded
-open import Lib.Data.Nat.Properties
-open import Lib.Data.Product
-open import Lib.Data.Unit
-open import Lib.Data.Vec
+-- Extra stuff
+open import Extra.Data.List.Induction
+open import Extra.Data.List.Properties
+open import Extra.Data.Nat.Induction.MathematicalInduction
+open import Extra.Data.Nat.Induction.WellFounded
+open import Extra.Data.Nat.Properties
+open import Extra.Data.Product
+open import Extra.Data.Unit
 
-open import Lib.Function
+open import Extra.Function
 
-open import Lib.Relation.Binary.PreorderReasoning
-open import Lib.Relation.Binary.PropositionalEquality
+open import Extra.Relation.Binary.PreorderReasoning
+open import Extra.Relation.Binary.PropositionalEquality
 
 -- Lectures
 open import README

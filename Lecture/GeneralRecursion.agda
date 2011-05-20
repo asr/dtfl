@@ -10,13 +10,12 @@ open import Data.List
 open import Data.Nat
 open import Data.Nat.Properties
 
+open import Extra.Data.Nat.Properties
+
 open import Induction
 open import Induction.Nat
 
-open import Relation.Binary
 open import Relation.Nullary
-
-module NDTO = DecTotalOrder decTotalOrder
 
 ------------------------------------------------------------------------------
 -- A structural recursive function.
@@ -171,10 +170,6 @@ mutual
   nestD : ∀ n → NestDom n → ℕ
   nestD .0       nestDom0             = 0
   nestD .(suc n) (nestDomS {n} h₁ h₂) = nestD (nestD n h₁) h₂
-
--- Auxiliary functions.
-≤′-trans : Transitive _≤′_
-≤′-trans i≤′j j≤′k = ≤⇒≤′ (NDTO.trans (≤′⇒≤ i≤′j) (≤′⇒≤ j≤′k))
 
 nestD-≤′ : ∀ n → (h : NestDom n) → nestD n h ≤′ n
 nestD-≤′ .0       nestDom0             = ≤′-refl

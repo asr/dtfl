@@ -2,10 +2,11 @@
 -- Well-founded induction on the natural numbers
 ------------------------------------------------------------------------------
 
-module Lib.Data.Nat.Induction.WellFounded where
+module Extra.Data.Nat.Induction.WellFounded where
 
-open import Lib.Data.Nat
-open import Lib.Data.Nat.Properties
+open import Data.Nat
+
+open import Extra.Data.Nat.Properties
 
 ------------------------------------------------------------------------------
 -- Well-founded induction on the natural numbers
@@ -24,6 +25,6 @@ wfIndℕ P ih n = ih n (helper n)
   where
     helper : ∀ n m → m < n → P m
     helper zero     m        ()
-    helper (succ n) zero     _          = ih zero (λ _ ())
-    helper (succ n) (succ m) (s≤s Sm≤n) =
-      ih (succ m) (λ m' Sm'≤Sm → helper n m' (≤-trans Sm'≤Sm Sm≤n))
+    helper (suc n) zero    _          = ih zero (λ _ ())
+    helper (suc n) (suc m) (s≤s Sm≤n) =
+      ih (suc m) (λ m' Sm'≤Sm → helper n m' (≤-trans Sm'≤Sm Sm≤n))

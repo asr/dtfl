@@ -2,7 +2,7 @@
 -- Products
 ------------------------------------------------------------------------------
 
-module Lib.Data.Product where
+module Extra.Data.Product where
 
 infixr 4 _,_
 infixr 2 _×_

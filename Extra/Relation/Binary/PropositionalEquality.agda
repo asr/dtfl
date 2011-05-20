@@ -2,7 +2,7 @@
 -- Propositional equality
 ------------------------------------------------------------------------------
 
-module Lib.Relation.Binary.PropositionalEquality where
+module Extra.Relation.Binary.PropositionalEquality where
 
 infix 4 _≡_
 

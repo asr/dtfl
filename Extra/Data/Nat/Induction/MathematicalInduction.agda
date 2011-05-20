@@ -2,9 +2,9 @@
 -- Mathematical induction
 ------------------------------------------------------------------------------
 
-module Lib.Data.Nat.Induction.MathematicalInduction where
+module Extra.Data.Nat.Induction.MathematicalInduction where
 
-open import Lib.Data.Nat
+open import Data.Nat
 
 ------------------------------------------------------------------------------
 -- Induction principle on natural numbers (mathematical induction)
@@ -22,7 +22,7 @@ open import Lib.Data.Nat
 
 indℕ : (P : ℕ → Set) →
        P zero →
-       (∀ n → P n → P (succ n)) →
+       (∀ n → P n → P (suc n)) →
        ∀ n → P n
-indℕ P P0 istep zero     = P0
-indℕ P P0 istep (succ n) = istep n (indℕ P P0 istep n)
+indℕ P P0 istep zero    = P0
+indℕ P P0 istep (suc n) = istep n (indℕ P P0 istep n)

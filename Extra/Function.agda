@@ -2,7 +2,7 @@
 -- Operations on functions
 ------------------------------------------------------------------------------
 
-module Lib.Function where
+module Extra.Function where
 
 flip : {A B C : Set} → (A → B → C) → B → A → C
 flip f b a = f a b

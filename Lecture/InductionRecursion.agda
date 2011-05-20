@@ -6,25 +6,26 @@
 
 module Lecture.InductionRecursion where
 
-open import Lib.Data.List
-open import Lib.Data.List.Induction
+open import Data.Nat
+open import Data.List
 
-open import Lib.Data.Nat
-open import Lib.Data.Nat.Properties
-open import Lib.Data.Nat.Induction.MathematicalInduction
-open import Lib.Data.Nat.Induction.WellFounded
+open import Extra.Data.List.Induction
 
-open import Lib.Relation.Binary.PropositionalEquality
+open import Extra.Data.Nat.Properties
+open import Extra.Data.Nat.Induction.MathematicalInduction
+open import Extra.Data.Nat.Induction.WellFounded
+
+open import Extra.Relation.Binary.PropositionalEquality
 
 ------------------------------------------------------------------------------
 -- Mathematical induction
 
--- See Lib.Data.Nat.Induction.MathematicalInduction.indℕ
+-- See Extra.Data.Nat.Induction.MathematicalInduction.indℕ
 
 -- Example: x + 0 = x
 -- How to represent 'x + 0 = x'?
 -- A. Using an equality on natural numbers (e.g. ℕ → ℕ → Set)
--- B. Using the identity type (see Lib.Relation.Binary.PropositionalEquality).
+-- B. Using the identity type (see Extra.Relation.Binary.PropositionalEquality).
 
 -- Example: x + 0 = x using mathematical induction.
 +-rightIdentity₁ : ∀ n → n + zero ≡ n
@@ -36,11 +37,11 @@ open import Lib.Relation.Binary.PropositionalEquality
     P0 : P zero
     P0 = refl
 
-    is : ∀ i → P i → P (succ i)
-    is i Pi = cong succ Pi
+    is : ∀ i → P i → P (suc i)
+    is i Pi = cong suc Pi
 
 -- Example: x + 0 = x using pattern matching.
--- See Lib.Data.Nat.Properties.+-rightIdentity
+-- See Extra.Data.Nat.Properties.+-rightIdentity
 
 -- Theoretical remark: Is there some difference?
 
@@ -55,16 +56,16 @@ open import Lib.Relation.Binary.PropositionalEquality
     P0 : P zero
     P0 = refl
 
-    is : ∀ i → P i → P (succ i)
-    is i Pi = cong succ Pi
+    is : ∀ i → P i → P (suc i)
+    is i Pi = cong suc Pi
 
 -- Example: associativy of addition using pattern matching.
--- See Lib.Data.Nat.Properties.+-assoc.
+-- See Extra.Data.Nat.Properties.+-assoc.
 
 ------------------------------------------------------------------------------
 -- Well-founded induction on the natural numbers
 
--- See Lib.Data.Nat.Induction.WellFounded.wfIndℕ
+-- See Extra.Data.Nat.Induction.WellFounded.wfIndℕ
 
 -- Example: x + 0 = x using mathematical induction.
 +-rightIdentity₂ : ∀ n → n + zero ≡ n
@@ -74,15 +75,15 @@ open import Lib.Relation.Binary.PropositionalEquality
     P x = x + zero ≡ x
 
     ih : ∀ y → (∀ x → x < y → P x) → P y
-    ih zero     _ = refl
-    ih (succ y) h = cong succ (h y (s≤s (≤-refl y)))
+    ih zero    _ = refl
+    ih (suc y) h = cong suc (h y (s≤s (≤-refl y)))
 
 ------------------------------------------------------------------------------
 -- Induction on lists
 
--- See Lib.Data.List
+-- See Data.List
 
--- See Lib.Data.List.Induction.indList
+-- See Extra.Data.List.Induction.indList
 
 -- Example: ++-assoc using induction.
 ++-assoc₁ : {A : Set}(xs ys zs : List A) → (xs ++ ys) ++ zs ≡ xs ++ (ys ++ zs)
@@ -98,7 +99,7 @@ open import Lib.Relation.Binary.PropositionalEquality
     ih i is Pis = cong₂ _∷_ refl Pis
 
 -- Example: ++-assoc using pattern matching.
--- See Lib.Data.List.Properties.++-assoc.
+-- See Extra.Data.List.Properties.++-assoc.
 
 -- Example: length-++
--- See Lib.Data.List.Properties.length-++
+-- See Extra.Data.List.Properties.length-++

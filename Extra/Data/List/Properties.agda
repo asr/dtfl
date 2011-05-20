@@ -2,12 +2,13 @@
 -- Lists properties
 ------------------------------------------------------------------------------
 
-module Lib.Data.List.Properties where
+module Extra.Data.List.Properties where
 
-open import Lib.Data.List
-open import Lib.Data.Nat
+open import Data.Nat
 
-open import Lib.Relation.Binary.PropositionalEquality
+open import Data.List
+
+open import Extra.Relation.Binary.PropositionalEquality
 
 ------------------------------------------------------------------------------
 
@@ -18,4 +19,4 @@ open import Lib.Relation.Binary.PropositionalEquality
 length-++ : {A : Set}(xs ys : List A) →
             length (xs ++ ys) ≡ length xs + length ys
 length-++ [] ys       = refl
-length-++ (x ∷ xs) ys = cong succ (length-++ xs ys)
+length-++ (x ∷ xs) ys = cong suc (length-++ xs ys)

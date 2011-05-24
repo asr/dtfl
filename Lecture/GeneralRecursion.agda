@@ -109,7 +109,7 @@ data GCDDom : ℕ → ℕ → Set where
             GCDDom (suc m ∸ suc n) (suc n) →
             GCDDom (suc m) (suc n)
 
- -- The gcd function by structural recursion on the domain predicate.
+-- The gcd function by structural recursion on the domain predicate.
 gcdD : ∀ m n → GCDDom m n → ℕ
 gcdD .0       .0        gcdDom₁                  = 0
 gcdD .(suc m) .0       (gcdDom₂ {m})             = suc m

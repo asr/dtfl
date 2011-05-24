@@ -113,9 +113,9 @@ data GCDDom : ℕ → ℕ → Set where
 
 -- The gcd function by structural recursion on the domain predicate.
 gcdD : ∀ m n → GCDDom m n → ℕ
-gcdD .0       .0        gcdDom₁                  = 0
-gcdD .(suc m) .0       (gcdDom₂ {m})             = suc m
-gcdD .0       .(suc n) (gcdDom₃ {n})             = suc n
+gcdD .0       .0        gcdDom₁              = 0
+gcdD .(suc m) .0       (gcdDom₂ {m})         = suc m
+gcdD .0       .(suc n) (gcdDom₃ {n})         = suc n
 gcdD .(suc m) .(suc n) (gcdDom₄ {m} {n} _ h) = gcdD (suc m) (suc n ∸ suc m) h
 gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} _ h) = gcdD (suc m ∸ suc n) (suc n) h
 

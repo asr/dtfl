@@ -15,7 +15,7 @@ open import Lecture.NonDependentTypes
 open import Lecture.PropositionsAsTypes
 open import Lecture.InductionRecursion
 open import Lecture.EquationalReasoning
-open import Lecture.AlgebraExamples
+open import Lecture.AlgebraicStructures
 open import Lecture.LeibnizEquality
 open import Lecture.InductiveFamilies
 open import Lecture.ReasoningAboutPrograms

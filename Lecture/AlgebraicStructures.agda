@@ -1,10 +1,10 @@
 ------------------------------------------------------------------------------
 -- Dependently typed functional languages - CB0683/2011-01
 
--- Algebra
+-- Algebraic structures
 ------------------------------------------------------------------------------
 
-module Lecture.AlgebraExamples where
+module Lecture.AlgebraicStructures where
 
 open import Data.Nat
 

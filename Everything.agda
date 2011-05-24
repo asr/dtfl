@@ -8,6 +8,7 @@ module Everything where
 open import Extra.Data.List.Induction
 open import Extra.Data.List.Properties
 open import Extra.Data.Nat.Induction.MathematicalInduction
+open import Extra.Data.Nat.Induction.Lexicographic
 open import Extra.Data.Nat.Induction.WellFounded
 open import Extra.Data.Nat.Properties
 open import Extra.Data.Product

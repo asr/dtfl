@@ -9,8 +9,10 @@ module Lecture.GeneralRecursion where
 open import Data.List
 open import Data.Nat
 open import Data.Nat.Properties
+open import Data.Product
 
 open import Extra.Data.Nat.Properties
+open import Extra.Data.Nat.Induction.Lexicographic
 open import Extra.Data.Nat.Induction.WellFounded
 
 open import Relation.Nullary
@@ -24,10 +26,10 @@ fac (suc n) = suc n * fac n
 ------------------------------------------------------------------------------
 -- A generalization of structural recursion: The termination checker
 
-swap : ℕ → ℕ → ℕ
-swap 0       _    = 0
-swap _       0    = 0
-swap (suc m) (suc n) = swap n m
+swap' : ℕ → ℕ → ℕ
+swap' 0       _       = 0
+swap' _       0       = 0
+swap' (suc m) (suc n) = swap' n m
 
 ack : ℕ → ℕ → ℕ
 ack zero     n      = suc n
@@ -101,11 +103,11 @@ data GCDDom : ℕ → ℕ → Set where
   gcdDom₂ : ∀ {m} → GCDDom (suc m) 0
   gcdDom₃ : ∀ {n} → GCDDom 0 (suc n)
   gcdDom₄ : ∀ {m n} →
-            suc m ≤ suc n →
+            suc m ≤′ suc n →
             GCDDom (suc m) (suc n ∸ suc m) →
             GCDDom (suc m) (suc n)
   gcdDom₅ : ∀ {m n} →
-            suc m > suc n →
+            suc m >′ suc n →
             GCDDom (suc m ∸ suc n) (suc n) →
             GCDDom (suc m) (suc n)
 
@@ -114,12 +116,30 @@ gcdD : ∀ m n → GCDDom m n → ℕ
 gcdD .0       .0        gcdDom₁                  = 0
 gcdD .(suc m) .0       (gcdDom₂ {m})             = suc m
 gcdD .0       .(suc n) (gcdDom₃ {n})             = suc n
-gcdD .(suc m) .(suc n) (gcdDom₄ {m} {n} sm≤sn h) = gcdD (suc m) (suc n ∸ suc m) h
-gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} sm>sn h) = gcdD (suc m ∸ suc n) (suc n) h
+gcdD .(suc m) .(suc n) (gcdDom₄ {m} {n} _ h) = gcdD (suc m) (suc n ∸ suc m) h
+gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} _ h) = gcdD (suc m ∸ suc n) (suc n) h
 
 -- The gcd function is total.
-postulate
-  allGCDDom : ∀ m n → GCDDom m n
+allGCDDom : ∀ m n → GCDDom m n
+allGCDDom m n = wf-⟪′ P ih (m , n)
+  where
+    P : ℕ × ℕ → Set
+    P mn = GCDDom (proj₁ mn) (proj₂ mn)
+
+    helper : ∀ a b → suc (a ∸ b) ≤′ suc a
+    helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
+
+    ih : ∀ xy → (∀ x'y' → x'y' ⟪′ xy → P x'y') → P xy
+    ih (zero  , zero)  h = gcdDom₁
+    ih (zero  , suc y) h = gcdDom₃
+    ih (suc x , zero)  h = gcdDom₂
+
+    ih (suc x , suc y) h with suc x ≤′? suc y
+    ... | yes p = gcdDom₄ p (h ((suc x) , (suc y ∸ suc x))
+                               (⟪′₂ (suc x) (helper y x)))
+
+    ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h ((suc x ∸ suc y) , (suc y))
+                                            (⟪′₁ (suc y) (suc y) (helper x y)))
 
 -- The final version of the gcd.
 gcd' : ℕ → ℕ → ℕ

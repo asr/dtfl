@@ -8,7 +8,7 @@
 (* A sorting example : (C) Yves Bertot, Pierre Castéran *)
 (* http://www.labri.fr/perso/casteran/CoqArt/index.html *)
 
-(* Tested with Coq 8.3 *)
+(* Tested with Coq 8.3pl2 *)
 
 Require Import Arith.Arith.
 Require Import List.

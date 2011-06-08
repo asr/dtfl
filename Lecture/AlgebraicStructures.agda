@@ -88,26 +88,26 @@ module MonoidsProperties (M : Monoid) where
   -- 6. d      = cb  (Hypothesis bb = ε).
   x²≡ε→comm h {b} {c} {d} bc≡d = sym d≡cb
     where
-      db≡c : d ∙ b ≡ c
-      db≡c =
-        begin
-          d ∙ b             ≡⟨ sym (rightIdentity (d ∙ b)) ⟩
-          d ∙ b ∙ ε         ≡⟨ cong (_∙_ (d ∙ b)) (sym (h c)) ⟩
-          d ∙ b ∙ (c ∙ c)   ≡⟨ ∙-assoc d b (c ∙ c) ⟩
-          d ∙ (b ∙ (c ∙ c)) ≡⟨ cong (_∙_ d) (sym (∙-assoc b c c)) ⟩
-          d ∙ ((b ∙ c) ∙ c) ≡⟨ cong (_∙_ d) (cong (flip _∙_ c) bc≡d) ⟩
-          d ∙ (d ∙ c)       ≡⟨ sym (∙-assoc d d c) ⟩
-          d ∙ d ∙ c         ≡⟨ cong (flip _∙_ c) (h d) ⟩
-          ε ∙ c             ≡⟨ leftIdentity c ⟩
-          c
-        ∎
+    db≡c : d ∙ b ≡ c
+    db≡c =
+      begin
+        d ∙ b             ≡⟨ sym (rightIdentity (d ∙ b)) ⟩
+        d ∙ b ∙ ε         ≡⟨ cong (_∙_ (d ∙ b)) (sym (h c)) ⟩
+        d ∙ b ∙ (c ∙ c)   ≡⟨ ∙-assoc d b (c ∙ c) ⟩
+        d ∙ (b ∙ (c ∙ c)) ≡⟨ cong (_∙_ d) (sym (∙-assoc b c c)) ⟩
+        d ∙ ((b ∙ c) ∙ c) ≡⟨ cong (_∙_ d) (cong (flip _∙_ c) bc≡d) ⟩
+        d ∙ (d ∙ c)       ≡⟨ sym (∙-assoc d d c) ⟩
+        d ∙ d ∙ c         ≡⟨ cong (flip _∙_ c) (h d) ⟩
+        ε ∙ c             ≡⟨ leftIdentity c ⟩
+        c
+      ∎
 
-      d≡cb : d ≡ c ∙ b
-      d≡cb =
-        begin
-          d           ≡⟨ sym (rightIdentity d) ⟩
-          d ∙ ε       ≡⟨ cong (_∙_ d) (sym (h b)) ⟩
-          d ∙ (b ∙ b) ≡⟨ sym (∙-assoc d b b) ⟩
-          d ∙ b ∙ b   ≡⟨ x≡y→xz≡yz db≡c ⟩
-          c ∙ b
-        ∎
+    d≡cb : d ≡ c ∙ b
+    d≡cb =
+      begin
+        d           ≡⟨ sym (rightIdentity d) ⟩
+        d ∙ ε       ≡⟨ cong (_∙_ d) (sym (h b)) ⟩
+        d ∙ (b ∙ b) ≡⟨ sym (∙-assoc d b b) ⟩
+        d ∙ b ∙ b   ≡⟨ x≡y→xz≡yz db≡c ⟩
+        c ∙ b
+      ∎

@@ -138,13 +138,13 @@ a→¬¬a a a→⊥ = a→⊥ a
 ∧∨-dist : {A B C : Set} → A ∧ (B ∨ C) ↔ A ∧ B ∨ A ∧ C
 ∧∨-dist {A} {B} {C} = l→r , r→l
   where
-    l→r : A ∧ (B ∨ C) → A ∧ B ∨ A ∧ C
-    l→r (a , inj₁ b) = inj₁ (a , b)
-    l→r (a , inj₂ c) = inj₂ (a , c)
+  l→r : A ∧ (B ∨ C) → A ∧ B ∨ A ∧ C
+  l→r (a , inj₁ b) = inj₁ (a , b)
+  l→r (a , inj₂ c) = inj₂ (a , c)
 
-    r→l : A ∧ B ∨ A ∧ C → A ∧ (B ∨ C)
-    r→l (inj₁ (a , b)) = a , inj₁ b
-    r→l (inj₂ (a , c)) = a , inj₂ c
+  r→l : A ∧ B ∨ A ∧ C → A ∧ (B ∨ C)
+  r→l (inj₁ (a , b)) = a , inj₁ b
+  r→l (inj₂ (a , c)) = a , inj₂ c
 
 ------------------------------------------------------------------------------
 -- Predicate logic
@@ -210,11 +210,11 @@ module Examples (A C : Set)(B : A → Set) where
   gDM : ¬ (∃ A B) ↔ ((x : A) → ¬ (B x))
   gDM = l→r , r→l
     where
-      l→r : ¬ (∃ A B) → (x : A) → ¬ (B x)
-      l→r f x bx = f (x , bx)
+    l→r : ¬ (∃ A B) → (x : A) → ¬ (B x)
+    l→r f x bx = f (x , bx)
 
-      r→l : ((x : A) → ¬ (B x)) → ¬ (∃ A B)
-      r→l f ∃ab = f (∃-proj₁ ∃ab) (∃-proj₂ ∃ab)
+    r→l : ((x : A) → ¬ (B x)) → ¬ (∃ A B)
+    r→l f ∃ab = f (∃-proj₁ ∃ab) (∃-proj₂ ∃ab)
 
   -- Forall to existential.
   ∀→∃ : ((x : A) → B x) → ∃ A B
@@ -225,11 +225,11 @@ module Examples (A C : Set)(B : A → Set) where
   ∃-erase₁ : ∃ A (λ _ → C) ↔ C
   ∃-erase₁ = l→r , r→l
     where
-      l→r : ∃ A (λ _ → C) → C
-      l→r (_ , c) = c
+    l→r : ∃ A (λ _ → C) → C
+    l→r (_ , c) = c
 
-      r→l : C → ∃ A (λ _ → C)
-      r→l c = someA , c
+    r→l : C → ∃ A (λ _ → C)
+    r→l c = someA , c
 
 ------------------------------------------------------------------------------
 -- Multi-sorted logic, higher-order logic?

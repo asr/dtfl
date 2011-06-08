@@ -181,49 +181,47 @@ insert-≙ (x ∷ xs) n with n ≤? x
 ... | yes p = λ _ → refl
 ... | no ¬p = prf
   where
-    prf : x ∷ insert n xs ≙ n ∷ x ∷ xs
-    prf =
-      begin
-        x ∷ insert n xs
-          ≈⟨ ≙-∷ x (insert-≙ xs n) ⟩
-        x ∷ n ∷ xs
-          ≈⟨ ≙-perm x n (≙-refl xs) ⟩
-        n ∷ x ∷ xs
-      ∎
-      where open Pre ≙-Preorder
+  prf : x ∷ insert n xs ≙ n ∷ x ∷ xs
+  prf =
+    begin
+      x ∷ insert n xs ≈⟨ ≙-∷ x (insert-≙ xs n) ⟩
+      x ∷ n ∷ xs ≈⟨ ≙-perm x n (≙-refl xs) ⟩
+      n ∷ x ∷ xs
+    ∎
+    where open Pre ≙-Preorder
 
 -- The insert sort.
 sortS : (xs : List ℕ) → Σ (List ℕ) (λ ys → Sorted ys × xs ≙ ys)
 sortS []       = [] , sorted-[] , (λ _ → refl)
 sortS (x ∷ xs) = l , l-Sorted , x∷xs≡l
   where
-    -- From the IH.
-    xs' : List ℕ
-    xs' = proj₁ $ sortS xs
+  -- From the IH.
+  xs' : List ℕ
+  xs' = proj₁ $ sortS xs
 
-    xs'-Sorted : Sorted xs'
-    xs'-Sorted = proj₁ $ proj₂ $ sortS xs
+  xs'-Sorted : Sorted xs'
+  xs'-Sorted = proj₁ $ proj₂ $ sortS xs
 
-    xs≙xs' : xs ≙ xs'
-    xs≙xs' = proj₂ $ proj₂ $ sortS xs
+  xs≙xs' : xs ≙ xs'
+  xs≙xs' = proj₂ $ proj₂ $ sortS xs
 
-    -- The output list.
-    l : List ℕ
-    l = insert x xs'
+  -- The output list.
+  l : List ℕ
+  l = insert x xs'
 
-    -- The output list is sorted.
-    l-Sorted : Sorted l
-    l-Sorted = insertSorted x xs'-Sorted
+  -- The output list is sorted.
+  l-Sorted : Sorted l
+  l-Sorted = insertSorted x xs'-Sorted
 
-    -- The output list "have the same elements" than the original list
-    x∷xs≙x∷xs' : x ∷ xs ≙ x ∷ xs'
-    x∷xs≙x∷xs' = ≙-∷ x xs≙xs'
+  -- The output list "have the same elements" than the original list
+  x∷xs≙x∷xs' : x ∷ xs ≙ x ∷ xs'
+  x∷xs≙x∷xs' = ≙-∷ x xs≙xs'
 
-    x∷xs'≙l : x ∷ xs' ≙ l
-    x∷xs'≙l = ≙-sym l (x ∷ xs') (insert-≙ xs' x)
+  x∷xs'≙l : x ∷ xs' ≙ l
+  x∷xs'≙l = ≙-sym l (x ∷ xs') (insert-≙ xs' x)
 
-    x∷xs≡l : x ∷ xs ≙ l
-    x∷xs≡l = ≙-trans (x ∷ xs) (x ∷ xs') l x∷xs≙x∷xs' x∷xs'≙l
+  x∷xs≡l : x ∷ xs ≙ l
+  x∷xs≡l = ≙-trans (x ∷ xs) (x ∷ xs') l x∷xs≙x∷xs' x∷xs'≙l
 
 -- Examples
 -- For example, using C-c C-n normalize sortW l₃ and sortS l₃

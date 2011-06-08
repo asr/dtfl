@@ -123,23 +123,23 @@ gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} _ h) = gcdD (suc m ∸ suc n) (suc n) 
 allGCDDom : ∀ m n → GCDDom m n
 allGCDDom m n = wf-⟪′ P ih (m , n)
   where
-    P : ℕ × ℕ → Set
-    P mn = GCDDom (proj₁ mn) (proj₂ mn)
+  P : ℕ × ℕ → Set
+  P mn = GCDDom (proj₁ mn) (proj₂ mn)
 
-    helper : ∀ a b → suc (a ∸ b) ≤′ suc a
-    helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
+  helper : ∀ a b → suc (a ∸ b) ≤′ suc a
+  helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
 
-    ih : ∀ xy → (∀ x'y' → x'y' ⟪′ xy → P x'y') → P xy
-    ih (zero  , zero)  h = gcdDom₁
-    ih (zero  , suc y) h = gcdDom₃
-    ih (suc x , zero)  h = gcdDom₂
+  ih : ∀ xy → (∀ x'y' → x'y' ⟪′ xy → P x'y') → P xy
+  ih (zero  , zero)  h = gcdDom₁
+  ih (zero  , suc y) h = gcdDom₃
+  ih (suc x , zero)  h = gcdDom₂
 
-    ih (suc x , suc y) h with suc x ≤′? suc y
-    ... | yes p = gcdDom₄ p (h ((suc x) , (suc y ∸ suc x))
-                               (⟪′₂ (suc x) (helper y x)))
+  ih (suc x , suc y) h with suc x ≤′? suc y
+  ... | yes p = gcdDom₄ p (h ((suc x) , (suc y ∸ suc x))
+                             (⟪′₂ (suc x) (helper y x)))
 
-    ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h ((suc x ∸ suc y) , (suc y))
-                                            (⟪′₁ (suc y) (suc y) (helper x y)))
+  ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h ((suc x ∸ suc y) , (suc y))
+                                          (⟪′₁ (suc y) (suc y) (helper x y)))
 
 -- The final version of the gcd.
 gcd' : ℕ → ℕ → ℕ
@@ -199,18 +199,18 @@ nestD-≤′ .(suc n) (nestDomS {n} h₁ h₂) =
 allNestDom : ∀ n → NestDom n
 allNestDom = wfIndℕ-<′ P ih
   where
-    P : ℕ → Set
-    P = NestDom
+  P : ℕ → Set
+  P = NestDom
 
-    ih : ∀ y → (∀ x → x <′ y → P x) → P y
-    ih zero    rec = nestDom0
-    ih (suc y) rec = nestDomS nd-y (rec (nestD y nd-y) (s≤′s (nestD-≤′ y nd-y)))
-        where
-          helper : ∀ x → x <′ y → P x
-          helper x Sx≤′y = rec x (≤′-step Sx≤′y)
+  ih : ∀ y → (∀ x → x <′ y → P x) → P y
+  ih zero    rec = nestDom0
+  ih (suc y) rec = nestDomS nd-y (rec (nestD y nd-y) (s≤′s (nestD-≤′ y nd-y)))
+    where
+    helper : ∀ x → x <′ y → P x
+    helper x Sx≤′y = rec x (≤′-step Sx≤′y)
 
-          nd-y : NestDom y
-          nd-y = ih y helper
+    nd-y : NestDom y
+    nd-y = ih y helper
 
 -- The final version of the nest function.
 nest' : ℕ → ℕ

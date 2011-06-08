@@ -31,14 +31,14 @@ open import Extra.Relation.Binary.PropositionalEquality
 +-rightIdentity₁ : ∀ n → n + zero ≡ n
 +-rightIdentity₁ n = indℕ P P0 is n
   where
-    P : ℕ → Set
-    P i = i + zero ≡ i
+  P : ℕ → Set
+  P i = i + zero ≡ i
 
-    P0 : P zero
-    P0 = refl
+  P0 : P zero
+  P0 = refl
 
-    is : ∀ i → P i → P (suc i)
-    is i Pi = cong suc Pi
+  is : ∀ i → P i → P (suc i)
+  is i Pi = cong suc Pi
 
 -- Example: x + 0 = x using pattern matching.
 -- See Extra.Data.Nat.Properties.+-rightIdentity
@@ -50,14 +50,14 @@ open import Extra.Relation.Binary.PropositionalEquality
 +-assoc₁ : ∀ m n o → m + n + o ≡ m + (n + o)
 +-assoc₁ m n o = indℕ P P0 is m
   where
-    P : ℕ → Set
-    P i = i + n + o ≡ i + (n + o)
+  P : ℕ → Set
+  P i = i + n + o ≡ i + (n + o)
 
-    P0 : P zero
-    P0 = refl
+  P0 : P zero
+  P0 = refl
 
-    is : ∀ i → P i → P (suc i)
-    is i Pi = cong suc Pi
+  is : ∀ i → P i → P (suc i)
+  is i Pi = cong suc Pi
 
 -- Example: associativy of addition using pattern matching.
 -- See Extra.Data.Nat.Properties.+-assoc.
@@ -71,12 +71,12 @@ open import Extra.Relation.Binary.PropositionalEquality
 +-rightIdentity₂ : ∀ n → n + zero ≡ n
 +-rightIdentity₂ n = wfIndℕ-< P ih n
   where
-    P : ℕ → Set
-    P x = x + zero ≡ x
+  P : ℕ → Set
+  P x = x + zero ≡ x
 
-    ih : ∀ y → (∀ x → x < y → P x) → P y
-    ih zero    _ = refl
-    ih (suc y) h = cong suc (h y (s≤s (≤-refl y)))
+  ih : ∀ y → (∀ x → x < y → P x) → P y
+  ih zero    _ = refl
+  ih (suc y) h = cong suc (h y (s≤s (≤-refl y)))
 
 ------------------------------------------------------------------------------
 -- Induction on lists
@@ -89,14 +89,14 @@ open import Extra.Relation.Binary.PropositionalEquality
 ++-assoc₁ : {A : Set}(xs ys zs : List A) → (xs ++ ys) ++ zs ≡ xs ++ (ys ++ zs)
 ++-assoc₁ {A} xs ys zs = indList P P[] ih xs
   where
-    P : List A → Set
-    P is = (is ++ ys) ++ zs ≡ is ++ (ys ++ zs)
+  P : List A → Set
+  P is = (is ++ ys) ++ zs ≡ is ++ (ys ++ zs)
 
-    P[] : P []
-    P[] = refl
+  P[] : P []
+  P[] = refl
 
-    ih : ∀ i → (is : List A) → P is → P (i ∷ is)
-    ih i is Pis = cong₂ _∷_ refl Pis
+  ih : ∀ i → (is : List A) → P is → P (i ∷ is)
+  ih i is Pis = cong₂ _∷_ refl Pis
 
 -- Example: ++-assoc using pattern matching.
 -- See Extra.Data.List.Properties.++-assoc.

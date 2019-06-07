@@ -2,6 +2,15 @@
 -- Products
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split              #-}
+{-# OPTIONS --guardedness              #-}
+{-# OPTIONS --no-sized-types           #-}
+{-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe                     #-}
+{-# OPTIONS --warning=all              #-}
+{-# OPTIONS --warning=error            #-}
+{-# OPTIONS --without-K                #-}
+
 module Extra.Data.Product where
 
 infixr 4 _,_

@@ -2,12 +2,22 @@
 -- Lexicographic induction on the natural numbers
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Extra.Data.Nat.Induction.Lexicographic where
 
 open import Data.Nat
 open import Data.Product
 
 ------------------------------------------------------------------------------
+
+infix 4 _<₂_
 
 data _<₂_ : ℕ × ℕ → ℕ × ℕ → Set where
   <₂-x : ∀ {x y x' y'} → x <′ x' → (x , y) <₂ (x' , y')

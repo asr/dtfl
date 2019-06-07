@@ -4,7 +4,14 @@
 -- General recursion
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split          #-}
+{-# OPTIONS --guardedness          #-}
+{-# OPTIONS --no-sized-types       #-}
 {-# OPTIONS --no-termination-check #-}
+-- {-# OPTIONS --safe                 #-}
+{-# OPTIONS --warning=all          #-}
+{-# OPTIONS --warning=error        #-}
+{-# OPTIONS --without-K            #-}
 
 module Lecture.GeneralRecursion where
 
@@ -30,6 +37,7 @@ fac (suc n) = suc n * fac n
 
 swap' : ℕ → ℕ → ℕ
 swap' 0       _       = 0
+{-# CATCHALL #-}
 swap' _       0       = 0
 swap' (suc m) (suc n) = swap' n m
 
@@ -48,6 +56,7 @@ ack (suc m) (suc n) = ack m (ack (suc m) n)
 -- accepted by the termination checker due to the use of the with.
 merge : List ℕ → List ℕ → List ℕ
 merge []       l₂ = l₂
+{-# CATCHALL #-}
 merge l₁       [] = l₁
 merge (x ∷ xs) (y ∷ ys) with x ≤? y
 ... | yes _ = x ∷ merge xs       (y ∷ ys)
@@ -56,6 +65,7 @@ merge (x ∷ xs) (y ∷ ys) with x ≤? y
 -- The merge-trick: Nested withs with the recursive calls.
 merge' :  List ℕ → List ℕ → List ℕ
 merge' []       l₂ = l₂
+{-# CATCHALL #-}
 merge' l₁       [] = l₁
 merge' (x ∷ xs) (y ∷ ys) with x ≤? y | merge' xs (y ∷ ys) | merge' (x ∷ xs) ys
 ... | yes p  | aux | _   = x ∷ aux

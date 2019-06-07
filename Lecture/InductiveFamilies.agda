@@ -15,6 +15,14 @@
 --     International School, AFP 2008, volume 5832 of
 --     LNCS. Springer-Verlag, 2009. pp. 230-266.
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Lecture.InductiveFamilies where
 
 open import Data.Nat
@@ -48,6 +56,8 @@ open import Extra.Data.Product
 -- Vectors: Types of lists of a certain length
 
 -- Inductive family definition:
+
+infixr 5 _∷_
 
 data Vec (A : Set) : ℕ → Set where
   []  :                         Vec A zero

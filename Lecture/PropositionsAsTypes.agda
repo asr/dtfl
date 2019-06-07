@@ -14,12 +14,21 @@
 -- Curry-Howard isomorphism, volume 149 of Studies in Logic and the
 -- Foundations of Mathematics. Elsevier, 2006.
 
+{-# OPTIONS --exact-split              #-}
+{-# OPTIONS --guardedness              #-}
+{-# OPTIONS --no-sized-types           #-}
+{-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --warning=all              #-}
+{-# OPTIONS --warning=error            #-}
+{-# OPTIONS --without-K                #-}
+
 module Lecture.PropositionsAsTypes where
 
 infix  6 ¬_
 infixr 6 _,_
 infixr 5 _∧_
 infixr 4 _∨_
+infixr 2 _⇒_
 infixr 2 _↔_
 
 ------------------------------------------------------------------------------

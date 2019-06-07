@@ -2,6 +2,14 @@
 -- Mathematical induction
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Extra.Data.Nat.Induction.MathematicalInduction where
 
 open import Data.Nat

@@ -4,6 +4,15 @@
 -- Leibniz's equality
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split              #-}
+{-# OPTIONS --guardedness              #-}
+{-# OPTIONS --no-sized-types           #-}
+{-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe                     #-}
+{-# OPTIONS --warning=all              #-}
+{-# OPTIONS --warning=error            #-}
+{-# OPTIONS --without-K                #-}
+
 module Lecture.LeibnizEquality where
 
 open import Extra.Relation.Binary.PropositionalEquality
@@ -34,7 +43,9 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- (From Agda/examples/lib/Logic/Leibniz.agda)
 
-_≐_ : {A : Set} → A → A → Set1
+infix 4 _≐_
+
+_≐_  : {A : Set} → A → A → Set1
 x ≐ y = (P : _ → Set) → P x → P y
 
 -- Properties

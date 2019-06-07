@@ -2,6 +2,15 @@
 -- Propositional equality
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split              #-}
+{-# OPTIONS --guardedness              #-}
+{-# OPTIONS --no-sized-types           #-}
+{-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe                     #-}
+{-# OPTIONS --warning=all              #-}
+{-# OPTIONS --warning=error            #-}
+{-# OPTIONS --without-K                #-}
+
 module Extra.Relation.Binary.PropositionalEquality where
 
 infix 4 _≡_

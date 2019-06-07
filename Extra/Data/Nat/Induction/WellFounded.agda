@@ -2,6 +2,14 @@
 -- Well-founded induction on the natural numbers
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Extra.Data.Nat.Induction.WellFounded where
 
 open import Data.Nat

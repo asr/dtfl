@@ -2,6 +2,14 @@
 -- Induction on lists
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Extra.Data.List.Induction where
 
 open import Data.List

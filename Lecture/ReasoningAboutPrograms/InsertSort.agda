@@ -4,6 +4,14 @@
 -- Example: Weak/strong specification of sorting a list (using insert sort)
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+-- {-# OPTIONS --without-K      #-}
+
 module Lecture.ReasoningAboutPrograms.InsertSort where
 
 open import Data.Empty

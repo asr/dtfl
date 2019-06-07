@@ -14,9 +14,22 @@
 -- To find out how to write a given character, position the cursor over
 -- the character and press C-u C-x =.
 
+{-# OPTIONS --exact-split              #-}
+{-# OPTIONS --guardedness              #-}
+{-# OPTIONS --no-sized-types           #-}
+{-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe                     #-}
+{-# OPTIONS --warning=all              #-}
+{-# OPTIONS --warning=error            #-}
+{-# OPTIONS --without-K                #-}
+
 module Lecture.NonDependentTypes where
 
 ------------------------------------------------------------------------------
+
+infixr 6 _,_
+infixr 5 _×_
+infixr 4 _+_
 
 -- Datatypes are introduced by a 'data' declaration, giving the name and
 -- type of the datatype as well as the data constructors and their types.
@@ -86,6 +99,8 @@ data Either (A B : Set) : Set where
 data ℕ : Set where
   zero : ℕ
   succ : ℕ → ℕ
+
+infixr 5 _∷_
 
 data List (A : Set) : Set where
   []  : List A

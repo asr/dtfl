@@ -2,6 +2,14 @@
 -- Natural numbers properties
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --safe           #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
+
 module Extra.Data.Nat.Properties where
 
 open import Data.Empty
@@ -52,6 +60,8 @@ x+Sy≡S[x+y] (suc m) n = cong suc (x+Sy≡S[x+y] m n)
     suc (n + m) ≡⟨ sym (x+Sy≡S[x+y] n m) ⟩
     n + suc m
   ∎
+
+infix 4 _≤′?_
 
 _≤′?_ : Decidable _≤′_
 m ≤′? n with m ≤? n

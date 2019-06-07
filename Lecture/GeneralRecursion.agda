@@ -123,25 +123,24 @@ gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} _ h) = gcdD (suc m ∸ suc n) (suc n) 
 
 -- The gcd function is total.
 allGCDDom : ∀ m n → GCDDom m n
-allGCDDom m n = wf-⟪′ P ih (m , n)
+allGCDDom m n = ℕ-lexi P ih m n
   where
-  P : ℕ × ℕ → Set
-  P mn = GCDDom (proj₁ mn) (proj₂ mn)
+  P : ℕ → ℕ → Set
+  P m n = GCDDom m n
 
   helper : ∀ a b → suc (a ∸ b) ≤′ suc a
   helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
 
-  ih : ∀ xy → (∀ x'y' → x'y' ⟪′ xy → P x'y') → P xy
-  ih (zero  , zero)  h = gcdDom₁
-  ih (zero  , suc y) h = gcdDom₃
-  ih (suc x , zero)  h = gcdDom₂
+  ih : ∀ x y → (∀ x' y' → (x' , y') <₂ (x , y) → P x' y') → P x y
+  ih zero zero    h = gcdDom₁
+  ih zero (suc y) h = gcdDom₃
+  ih (suc x) zero h = gcdDom₂
 
-  ih (suc x , suc y) h with suc x ≤′? suc y
-  ... | yes p = gcdDom₄ p (h ((suc x) , (suc y ∸ suc x))
-                             (⟪′₂ (suc x) (helper y x)))
+  ih (suc x) (suc y) h with suc x ≤′? suc y
+  ... | yes p = gcdDom₄ p (h (suc x) (suc y ∸ suc x) (<₂-y (helper y x)))
 
-  ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h ((suc x ∸ suc y) , (suc y))
-                                          (⟪′₁ (suc y) (suc y) (helper x y)))
+  ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h (suc x ∸ suc y) (suc y)
+                                          (<₂-x (helper x y)))
 
 -- The final version of the gcd.
 gcd' : ℕ → ℕ → ℕ

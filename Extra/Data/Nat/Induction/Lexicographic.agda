@@ -9,21 +9,25 @@ open import Data.Product
 
 ------------------------------------------------------------------------------
 
-data _⟪′_ : ℕ × ℕ → ℕ × ℕ → Set where
-  ⟪′₁ : ∀ {x x'} y y' → x <′ x' → (x , y ) ⟪′ (x' , y')
-  ⟪′₂ : ∀ x {y y'}    → y <′ y' → (x , y ) ⟪′ (x , y')
+data _<₂_ : ℕ × ℕ → ℕ × ℕ → Set where
+  <₂-x : ∀ {x y x' y'} → x <′ x' → (x , y) <₂ (x' , y')
+  <₂-y : ∀ {x y y'} → y <′ y' → (x , y) <₂ (x , y')
 
-wf-⟪′ : (P : ℕ × ℕ → Set) →
-        (∀ xy → (∀ x'y' → x'y' ⟪′ xy → P x'y') → P xy) →
-        ∀ xy → P xy
-wf-⟪′ P ih xs = ih xs (helper xs)
+ℕ-lexi : (P : ℕ → ℕ → Set) →
+         (∀ m n → (∀ m' n' → (m' , n') <₂ (m , n) → P m' n') → P m n) →
+         ∀ m n → P m n
+ℕ-lexi P h m n = h m n (helper m n)
   where
-    helper : ∀ xy x'y' → x'y' ⟪′ xy → P x'y'
-    helper .(suc x , y) .(x , y') (⟪′₁ {x} y' y ≤′-refl) =
-      ih (x , y') (helper (x , y'))
-    helper .(suc x , y) .(x' , y') (⟪′₁ {x'} y' y (≤′-step {x} sx'≤′x)) =
-      helper (x , x) (x' , y') (⟪′₁ y' x sx'≤′x)
-    helper .(x' , suc y') .(x' , y') (⟪′₂ x' {y'} ≤′-refl) =
-      ih (x' , y') (helper (x' , y'))
-    helper .(x , suc y) .(x , y') (⟪′₂ x {y'} (≤′-step {y} sy'≤′y)) =
-      helper (x , y) (x , y') (⟪′₂ x sy'≤′y)
+  helper : ∀ a b a' b' → (a' , b') <₂ (a , b) → P a' b'
+  helper zero b zero b' (<₂-x ())
+  helper zero zero zero b' (<₂-y ())
+  helper zero (suc b) zero .b (<₂-y ≤′-refl) = h zero b (helper zero b)
+  helper zero (suc b) zero zero (<₂-y (≤′-step x)) = helper zero b zero zero (<₂-y x)
+  helper zero (suc b) zero (suc b') (<₂-y (≤′-step x)) = helper zero b zero (suc b') (<₂-y x)
+  helper (suc .0) b zero b' (<₂-x ≤′-refl) = h zero b' (helper zero b')
+  helper (suc a) b zero b' (<₂-x (≤′-step x)) = helper a b zero b' (<₂-x x)
+  helper zero b (suc a') b' (<₂-x ())
+  helper (suc .(suc a')) b (suc a') b' (<₂-x ≤′-refl) = h (suc a') b' (helper (suc a') b')
+  helper (suc a) b (suc a') b' (<₂-x (≤′-step x)) = helper a b (suc a') b' (<₂-x x)
+  helper (suc a) .(suc b') (suc .a) b' (<₂-y ≤′-refl) = h (suc a) b' (helper (suc a) b')
+  helper (suc a) .(suc n₁) (suc .a) b' (<₂-y (≤′-step {n₁} x)) = helper (suc a) n₁ (suc a) b' (<₂-y x)

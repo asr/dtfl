@@ -2,7 +2,9 @@
 -- Agda code for the course dependently typed functional languages -
 -- CB0683/2011-01
 
--- Course home page: http://www1.eafit.edu.co/asicard/teaching/dtfl-CB0683/
+-- Course home page:
+-- http://www1.eafit.edu.co/asr/courses/dependently-typed-functional-languages/index.html
+
 ------------------------------------------------------------------------------
 
 -- The code has been tested with Agda 2.3.0 and the Agda standard

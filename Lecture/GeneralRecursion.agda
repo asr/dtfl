@@ -4,6 +4,8 @@
 -- General recursion
 ------------------------------------------------------------------------------
 
+{-# OPTIONS --no-termination-check #-}
+
 module Lecture.GeneralRecursion where
 
 open import Data.List

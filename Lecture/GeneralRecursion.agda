@@ -9,8 +9,8 @@
 module Lecture.GeneralRecursion where
 
 open import Data.List
-open import Data.Nat
-open import Data.Nat.Properties
+open import Data.Nat hiding (_≤′?_ )
+open import Data.Nat.Properties hiding (_≤′?_ ; ≤′-trans )
 open import Data.Product
 
 open import Extra.Data.Nat.Properties

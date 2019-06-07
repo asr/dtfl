@@ -12,11 +12,10 @@ module Extra.Relation.Binary.PreorderReasoning where
 
 open import Extra.Relation.Binary.PropositionalEquality
 
--- We add 3 to the fixities of the standard library.
-infix 7 _≃_
-infix  4 begin_
-infixr 5 _≡⟨_⟩_
-infix  5 _∎
+infix  4 _≃_
+infix  3 _∎
+infixr 2 _≡⟨_⟩_
+infix  1 begin_
 
 ------------------------------------------------------------------------------
 -- Adapted from the standard library (Relation.Binary.PreorderReasoning).

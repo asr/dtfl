@@ -5,8 +5,9 @@
 module Extra.Data.Nat.Properties where
 
 open import Data.Empty
-open import Data.Nat
+open import Data.Nat hiding ( _≤′?_ )
 open import Data.Nat.Properties
+  hiding ( _≤′?_ ; ≤-refl ; ≤-trans ; ≤′-trans ; +-assoc ; +-comm )
 
 open import Extra.Relation.Binary.PreorderReasoning
 open import Extra.Relation.Binary.PropositionalEquality

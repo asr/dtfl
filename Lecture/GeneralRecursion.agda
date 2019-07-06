@@ -4,14 +4,17 @@
 -- General recursion
 ------------------------------------------------------------------------------
 
-{-# OPTIONS --exact-split          #-}
-{-# OPTIONS --guardedness          #-}
-{-# OPTIONS --no-sized-types       #-}
-{-# OPTIONS --no-termination-check #-}
--- {-# OPTIONS --safe                 #-}
-{-# OPTIONS --warning=all          #-}
-{-# OPTIONS --warning=error        #-}
-{-# OPTIONS --without-K            #-}
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+
+-- We cannot use the `safe` option because we are using the
+-- `TERMINATING` flag.
+-- {-# OPTIONS --safe #-}
+
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+{-# OPTIONS --without-K      #-}
 
 module Lecture.GeneralRecursion where
 
@@ -54,6 +57,7 @@ ack (suc m) (suc n) = ack m (ack (suc m) n)
 -- The non-terminating original function.
 -- The function is structurally recursive, but the function is not
 -- accepted by the termination checker due to the use of the with.
+{-# TERMINATING #-}
 merge : List ℕ → List ℕ → List ℕ
 merge []       l₂ = l₂
 {-# CATCHALL #-}
@@ -74,6 +78,7 @@ merge' (x ∷ xs) (y ∷ ys) with x ≤? y | merge' xs (y ∷ ys) | merge' (x �
 ------------------------------------------------------------------------------
 -- A non-structural recursive function: simple general recursion
 
+{-# TERMINATING #-}
 gcd : ℕ → ℕ → ℕ
 gcd 0       0       = 0
 gcd (suc m) 0       = suc m
@@ -161,6 +166,7 @@ gcd' m n = gcdD m n (allGCDDom m n)
 
 -- The function is not accepted by the termination checker due to the
 -- nested recursive call.
+{-# TERMINATING #-}
 nest : ℕ → ℕ
 nest 0       = 0
 nest (suc n) = nest (nest n)

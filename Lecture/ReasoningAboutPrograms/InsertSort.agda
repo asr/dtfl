@@ -15,7 +15,7 @@
 module Lecture.ReasoningAboutPrograms.InsertSort where
 
 open import Data.Empty
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 open import Data.Product
 open import Data.List
 
@@ -58,9 +58,9 @@ sortW (x ∷ xs) = insert x (sortW xs)
 -- Auxiliary properties
 
 ¬x≤y→y≤x : ∀ {m n}  → ¬ (m ≤ n) → n ≤ m
-¬x≤y→y≤x {m}     {zero}     _  = z≤n
-¬x≤y→y≤x {zero}  {suc n} ¬m≤Sn = ⊥-elim (¬m≤Sn z≤n)
-¬x≤y→y≤x {suc m} {suc n} ¬m≤Sn = s≤s (¬x≤y→y≤x (λ m≤n → ¬m≤Sn (s≤s m≤n)))
+¬x≤y→y≤x {m}      {zero}   _     = z≤n
+¬x≤y→y≤x {zero}   {succ n} ¬m≤Sn = ⊥-elim (¬m≤Sn z≤n)
+¬x≤y→y≤x {succ m} {succ n} ¬m≤Sn = s≤s (¬x≤y→y≤x (λ m≤n → ¬m≤Sn (s≤s m≤n)))
 
 -- To be a sorted list.
 data Sorted : List ℕ → Set where
@@ -72,7 +72,7 @@ data Sorted : List ℕ → Set where
 2357-sorted = sorted-∷ (s≤s (s≤s z≤n))
                 (sorted-∷ (s≤s (s≤s (s≤s z≤n)))
                  (sorted-∷ (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))
-                  (sorted-x (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+                  (sorted-x (succ (succ (succ (succ (succ (succ (succ zero))))))))))
 
 -- Some properties of the relation Sorted.
 
@@ -142,21 +142,21 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 
 ≙-∷ : ∀ z {xs ys} → xs ≙ ys → z ∷ xs ≙ z ∷ ys
 ≙-∷ z xs≙ys n with n ≟ z
-≙-∷ z xs≙ys n | yes _ = cong suc (xs≙ys n)
+≙-∷ z xs≙ys n | yes _ = cong succ (xs≙ys n)
 ≙-∷ z xs≙ys n | no  _ = xs≙ys n
 
 ≙-perm : ∀ n₁ n₂ {xs} {ys} → xs ≙ ys → n₁ ∷ n₂ ∷ xs ≙ n₂ ∷ n₁ ∷ ys
 ≙-perm n₁  n₂ h n   with n ≟ n₁ | n ≟ n₂
-≙-perm .n₂ n₂ h .n₂ | yes refl | yes refl = cong suc (≙-∷ n₂ h n₂)
+≙-perm .n₂ n₂ h .n₂ | yes refl | yes refl = cong succ (≙-∷ n₂ h n₂)
 ≙-perm n₁  n₂ h .n₁ | yes refl | no  ¬p   with n₁ ≟ n₂
 ≙-perm n₂  _  h .n₂ | yes refl | no  ¬p   | yes p = ⊥-elim (¬p p)
 ≙-perm n₂  _  h .n₂ | yes refl | no  ¬p'  | no  ¬p  with n₂ ≟ n₂
-≙-perm n₂  _  h .n₂ | yes refl | no  ¬p'  | no  ¬p  | yes refl = cong suc (h n₂)
+≙-perm n₂  _  h .n₂ | yes refl | no  ¬p'  | no  ¬p  | yes refl = cong succ (h n₂)
 ≙-perm n₂  _  h .n₂ | yes refl | no  ¬p0  | no  ¬p' | no  ¬p   = ⊥-elim (¬p refl)
 ≙-perm n₁  n₂ h .n₂ | no  ¬p   | yes refl with n₂ ≟ n₂
 ≙-perm n₂  n₃ h ._  | no  ¬p   | yes refl | yes refl with n₃ ≟ n₂
 ≙-perm n₃  _  h ._  | no  ¬p   | yes refl | yes refl | yes p  = ⊥-elim (¬p p)
-≙-perm n₃  n₄ h ._  | no  ¬p'  | yes refl | yes refl | no  ¬p = cong suc (h n₄)
+≙-perm n₃  n₄ h ._  | no  ¬p'  | yes refl | yes refl | no  ¬p = cong succ (h n₄)
 ≙-perm n₂  _  h ._  | no  ¬p'  | yes refl | no  ¬p = ⊥-elim (¬p refl)
 ≙-perm n₁  n₂ h n   | no  ¬p   | no  ¬p'  with n ≟ n₂
 ≙-perm n₁  n₂ h .n₂ | no  ¬p   | no  ¬p'  | yes refl = ⊥-elim (¬p' refl)

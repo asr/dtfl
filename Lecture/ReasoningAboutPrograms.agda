@@ -15,7 +15,7 @@
 module Lecture.ReasoningAboutPrograms where
 
 open import Data.List
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 open import Data.Vec
 
 ------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ appendL = Data.List._++_
 
 -- Strong specification.
 appendV : {A : Set}(m n : ℕ) → Vec A m → Vec A n → Vec A (m + n)
-appendV .zero    n []             ys = ys
-appendV .(suc m) n (_∷_ {m} x xs) ys = x ∷ appendV m n xs ys
+appendV .zero     n []             ys = ys
+appendV .(succ m) n (_∷_ {m} x xs) ys = x ∷ appendV m n xs ys
 
 ------------------------------------------------------------------------------
 -- Example: Sorting a list (using insert sort)

@@ -14,10 +14,9 @@
 
 module Lecture.EquationalReasoning where
 
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 
 open import Extra.Data.Nat.Properties
-
 open import Extra.Relation.Binary.PreorderReasoning
 open import Extra.Relation.Binary.PropositionalEquality
 
@@ -54,13 +53,13 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- Example: +-comm
 +-comm₁ : ∀ m n → m + n ≡ n + m
-+-comm₁ zero    n = sym (+-rightIdentity n)
-+-comm₁ (suc m) n =
++-comm₁ zero     n = sym (+-rightIdentity n)
++-comm₁ (succ m) n =
   begin
-    suc m + n   ≡⟨ refl ⟩
-    suc (m + n) ≡⟨ cong suc (+-comm m n) ⟩
-    suc (n + m) ≡⟨ sym (x+Sy≡S[x+y] n m) ⟩
-    n + suc m
+    succ m + n   ≡⟨ refl ⟩
+    succ (m + n) ≡⟨ cong succ (+-comm m n) ⟩
+    succ (n + m) ≡⟨ sym (x+Sy≡S[x+y] n m) ⟩
+    n + succ m
   ∎
 
 -- Agda equational reasoning

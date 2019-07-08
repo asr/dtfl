@@ -14,12 +14,10 @@
 
 module Lecture.AlgebraicStructures where
 
-open import Data.Nat
-
-open import Extra.Data.Nat.Properties
-
+open import Data.Nat renaming (suc to succ)
 open import Function
 
+open import Extra.Data.Nat.Properties
 open import Extra.Relation.Binary.PropositionalEquality
 open import Extra.Relation.Binary.PreorderReasoning
 

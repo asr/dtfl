@@ -12,7 +12,7 @@
 
 module Extra.Data.Nat.Induction.WellFounded where
 
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 
 open import Extra.Data.Nat.Properties
 
@@ -33,9 +33,9 @@ wfIndℕ-< P ih n = ih n (helper n)
   where
   helper : ∀ n m → m < n → P m
   helper zero     m        ()
-  helper (suc n) zero    _          = ih zero (λ _ ())
-  helper (suc n) (suc m) (s≤s Sm≤n) =
-    ih (suc m) (λ m' Sm'≤Sm → helper n m' (≤-trans Sm'≤Sm Sm≤n))
+  helper (succ n) zero     _          = ih zero (λ _ ())
+  helper (succ n) (succ m) (s≤s Sm≤n) =
+    ih (succ m) (λ m' Sm'≤Sm → helper n m' (≤-trans Sm'≤Sm Sm≤n))
 
 wfIndℕ-<′ : (P : ℕ → Set) →
             (∀ n → (∀ m → m <′ n → P m) → P n) →
@@ -43,5 +43,5 @@ wfIndℕ-<′ : (P : ℕ → Set) →
 wfIndℕ-<′ P ih n = ih n (helper n)
   where
   helper : ∀ n m → m <′ n → P m
-  helper .(suc m) m ≤′-refl             = ih m (helper m)
-  helper .(suc n) m (≤′-step {n} Sm≤′n) = helper n m Sm≤′n
+  helper .(succ m) m ≤′-refl             = ih m (helper m)
+  helper .(succ n) m (≤′-step {n} Sm≤′n) = helper n m Sm≤′n

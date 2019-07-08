@@ -12,7 +12,7 @@
 
 module Extra.Data.Nat.Induction.Lexicographic where
 
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 open import Data.Product
 
 ------------------------------------------------------------------------------
@@ -31,13 +31,13 @@ data _<₂_ : ℕ × ℕ → ℕ × ℕ → Set where
   helper : ∀ a b a' b' → (a' , b') <₂ (a , b) → P a' b'
   helper zero b zero b' (<₂-x ())
   helper zero zero zero b' (<₂-y ())
-  helper zero (suc b) zero .b (<₂-y ≤′-refl) = h zero b (helper zero b)
-  helper zero (suc b) zero zero (<₂-y (≤′-step x)) = helper zero b zero zero (<₂-y x)
-  helper zero (suc b) zero (suc b') (<₂-y (≤′-step x)) = helper zero b zero (suc b') (<₂-y x)
-  helper (suc .0) b zero b' (<₂-x ≤′-refl) = h zero b' (helper zero b')
-  helper (suc a) b zero b' (<₂-x (≤′-step x)) = helper a b zero b' (<₂-x x)
-  helper zero b (suc a') b' (<₂-x ())
-  helper (suc .(suc a')) b (suc a') b' (<₂-x ≤′-refl) = h (suc a') b' (helper (suc a') b')
-  helper (suc a) b (suc a') b' (<₂-x (≤′-step x)) = helper a b (suc a') b' (<₂-x x)
-  helper (suc a) .(suc b') (suc .a) b' (<₂-y ≤′-refl) = h (suc a) b' (helper (suc a) b')
-  helper (suc a) .(suc n₁) (suc .a) b' (<₂-y (≤′-step {n₁} x)) = helper (suc a) n₁ (suc a) b' (<₂-y x)
+  helper zero (succ b) zero .b (<₂-y ≤′-refl) = h zero b (helper zero b)
+  helper zero (succ b) zero zero (<₂-y (≤′-step x)) = helper zero b zero zero (<₂-y x)
+  helper zero (succ b) zero (succ b') (<₂-y (≤′-step x)) = helper zero b zero (succ b') (<₂-y x)
+  helper (succ .0) b zero b' (<₂-x ≤′-refl) = h zero b' (helper zero b')
+  helper (succ a) b zero b' (<₂-x (≤′-step x)) = helper a b zero b' (<₂-x x)
+  helper zero b (succ a') b' (<₂-x ())
+  helper (succ .(succ a')) b (succ a') b' (<₂-x ≤′-refl) = h (succ a') b' (helper (succ a') b')
+  helper (succ a) b (succ a') b' (<₂-x (≤′-step x)) = helper a b (succ a') b' (<₂-x x)
+  helper (succ a) .(succ b') (succ .a) b' (<₂-y ≤′-refl) = h (succ a) b' (helper (succ a) b')
+  helper (succ a) .(succ n₁) (succ .a) b' (<₂-y (≤′-step {n₁} x)) = helper (succ a) n₁ (succ a) b' (<₂-y x)

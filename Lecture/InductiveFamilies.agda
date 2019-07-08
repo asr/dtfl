@@ -25,7 +25,7 @@
 
 module Lecture.InductiveFamilies where
 
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 
 open import Extra.Data.Unit
 open import Extra.Data.Product
@@ -61,7 +61,7 @@ infixr 5 _∷_
 
 data Vec (A : Set) : ℕ → Set where
   []  :                         Vec A zero
-  _∷_ : {n : ℕ} → A → Vec A n → Vec A (suc n)
+  _∷_ : {n : ℕ} → A → Vec A n → Vec A (succ n)
 
 -- The type of vectors.
 -- Vec A : ℕ → Set, i.e. Vec A is an inductive family parametrized by
@@ -82,17 +82,17 @@ data Vec (A : Set) : ℕ → Set where
 -- Using the inductive familiy of vectors we can express the type of
 -- non-empty lists.
 
-head : {A : Set}{n : ℕ} → Vec A (suc n) → A
+head : {A : Set}{n : ℕ} → Vec A (succ n) → A
 head (x ∷ xs) = x
 
-tail : {A : Set}{n : ℕ} → Vec A (suc n) → Vec A n
+tail : {A : Set}{n : ℕ} → Vec A (succ n) → Vec A n
 tail (x ∷ xs) = xs
 
 -- Using the inductive familiy of vectors we can express that two list
 -- are the same length.
 zip : {A B : Set}(n : ℕ) → Vec A n → Vec B n → Vec (A × B) n
-zip .zero     []            []       = []
-zip .(suc n) (_∷_ {n} x xs) (y ∷ ys) = (x , y) ∷ zip n xs ys
+zip .zero      []            []       = []
+zip .(succ n) (_∷_ {n} x xs) (y ∷ ys) = (x , y) ∷ zip n xs ys
 
 ------------------------------------------------------------------------------
 -- Alternative definition of vectors: Recursive definition by
@@ -103,21 +103,21 @@ zip .(suc n) (_∷_ {n} x xs) (y ∷ ys) = (x , y) ∷ zip n xs ys
 -- A^(n+1) = A x A^n
 
 VecR : Set → ℕ → Set
-VecR A zero    = ⊤
-VecR A (suc n) = A × (VecR A n)
+VecR A zero     = ⊤
+VecR A (succ n) = A × (VecR A n)
 
 -- Examples
 
 -- Using the recursive definition of vectors we can express the type
 -- of non-empty lists.
-headR : {A : Set}{n : ℕ} → VecR A (suc n) → A
+headR : {A : Set}{n : ℕ} → VecR A (succ n) → A
 headR (x , xs) = x
 
 -- Using the recursive definition of vectors we can express that two
 -- list are the same length.
 zipR : {A B : Set}(n : ℕ) → VecR A n → VecR B n → VecR (A × B) n
-zipR zero     xs       ys      = _
-zipR (suc n) (x , xs) (y , ys) = (x , y) , (zipR n xs ys)
+zipR zero     xs       ys       = _
+zipR (succ n) (x , xs) (y , ys) = (x , y) , (zipR n xs ys)
 
 ------------------------------------------------------------------------------
 -- Inductive families or recursive definitions?

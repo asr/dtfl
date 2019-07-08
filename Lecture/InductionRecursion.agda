@@ -14,7 +14,7 @@
 
 module Lecture.InductionRecursion where
 
-open import Data.Nat
+open import Data.Nat renaming (suc to succ)
 open import Data.List
 
 open import Extra.Data.List.Induction
@@ -45,8 +45,8 @@ open import Extra.Relation.Binary.PropositionalEquality
   P0 : P zero
   P0 = refl
 
-  is : ∀ i → P i → P (suc i)
-  is i Pi = cong suc Pi
+  is : ∀ i → P i → P (succ i)
+  is i Pi = cong succ Pi
 
 -- Example: x + 0 = x using pattern matching.
 -- See Extra.Data.Nat.Properties.+-rightIdentity
@@ -64,8 +64,8 @@ open import Extra.Relation.Binary.PropositionalEquality
   P0 : P zero
   P0 = refl
 
-  is : ∀ i → P i → P (suc i)
-  is i Pi = cong suc Pi
+  is : ∀ i → P i → P (succ i)
+  is i Pi = cong succ Pi
 
 -- Example: associativy of addition using pattern matching.
 -- See Extra.Data.Nat.Properties.+-assoc.
@@ -83,8 +83,8 @@ open import Extra.Relation.Binary.PropositionalEquality
   P x = x + zero ≡ x
 
   ih : ∀ y → (∀ x → x < y → P x) → P y
-  ih zero    _ = refl
-  ih (suc y) h = cong suc (h y (s≤s (≤-refl y)))
+  ih zero     _ = refl
+  ih (succ y) h = cong succ (h y (s≤s (≤-refl y)))
 
 ------------------------------------------------------------------------------
 -- Induction on lists

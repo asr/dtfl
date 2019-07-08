@@ -19,7 +19,7 @@
 module Lecture.GeneralRecursion where
 
 open import Data.List
-open import Data.Nat hiding (_≤′?_ )
+open import Data.Nat renaming (suc to succ) hiding (_≤′?_ )
 open import Data.Nat.Properties hiding (_≤′?_ ; ≤′-trans )
 open import Data.Product
 
@@ -32,8 +32,8 @@ open import Relation.Nullary
 ------------------------------------------------------------------------------
 -- A structural recursive function.
 fac : ℕ → ℕ
-fac zero    = 1
-fac (suc n) = suc n * fac n
+fac zero     = 1
+fac (succ n) = succ n * fac n
 
 ------------------------------------------------------------------------------
 -- A generalization of structural recursion: The termination checker
@@ -41,13 +41,13 @@ fac (suc n) = suc n * fac n
 swap' : ℕ → ℕ → ℕ
 swap' 0       _       = 0
 {-# CATCHALL #-}
-swap' _       0       = 0
-swap' (suc m) (suc n) = swap' n m
+swap' _        0        = 0
+swap' (succ m) (succ n) = swap' n m
 
 ack : ℕ → ℕ → ℕ
-ack zero     n      = suc n
-ack (suc m) zero    = ack m (suc zero)
-ack (suc m) (suc n) = ack m (ack (suc m) n)
+ack zero     n        = succ n
+ack (succ m) zero     = ack m (succ zero)
+ack (succ m) (succ n) = ack m (ack (succ m) n)
 
 ------------------------------------------------------------------------------
 -- The with issue
@@ -80,16 +80,16 @@ merge' (x ∷ xs) (y ∷ ys) with x ≤? y | merge' xs (y ∷ ys) | merge' (x �
 
 {-# TERMINATING #-}
 gcd : ℕ → ℕ → ℕ
-gcd 0       0       = 0
-gcd (suc m) 0       = suc m
-gcd 0       (suc n) = suc n
-gcd (suc m) (suc n) with (suc m ≤? suc n)
--- The argument suc n ∸ suc m is not structurally smaller than the
--- argument suc n.
-... | yes p = gcd (suc m) (suc n ∸ suc m)
--- The argument suc m ∸ suc n is not structurally smaller than the
--- argument suc n.
-... | no ¬p = gcd (suc m ∸ suc n) (suc n)
+gcd 0        0        = 0
+gcd (succ m) 0        = succ m
+gcd 0        (succ n) = succ n
+gcd (succ m) (succ n) with (succ m ≤? succ n)
+-- The argument `sucn n ∸ succ m` is not structurally smaller than the
+-- argument `succ n`.
+... | yes p = gcd (succ m) (succ n ∸ succ m)
+-- The argument `succ m ∸ succ n` is not structurally smaller than the
+-- argument `succ n`.
+... | no ¬p = gcd (succ m ∸ succ n) (succ n)
 
 -- Can we apply the merge-trick?
 
@@ -117,24 +117,24 @@ gcd (suc m) (suc n) with (suc m ≤? suc n)
 
 data GCDDom : ℕ → ℕ → Set where
   gcdDom₁ : GCDDom 0 0
-  gcdDom₂ : ∀ {m} → GCDDom (suc m) 0
-  gcdDom₃ : ∀ {n} → GCDDom 0 (suc n)
+  gcdDom₂ : ∀ {m} → GCDDom (succ m) 0
+  gcdDom₃ : ∀ {n} → GCDDom 0 (succ n)
   gcdDom₄ : ∀ {m n} →
-            suc m ≤′ suc n →
-            GCDDom (suc m) (suc n ∸ suc m) →
-            GCDDom (suc m) (suc n)
+            succ m ≤′ succ n →
+            GCDDom (succ m) (succ n ∸ succ m) →
+            GCDDom (succ m) (succ n)
   gcdDom₅ : ∀ {m n} →
-            suc m >′ suc n →
-            GCDDom (suc m ∸ suc n) (suc n) →
-            GCDDom (suc m) (suc n)
+            succ m >′ succ n →
+            GCDDom (succ m ∸ succ n) (succ n) →
+            GCDDom (succ m) (succ n)
 
 -- The gcd function by structural recursion on the domain predicate.
 gcdD : ∀ m n → GCDDom m n → ℕ
-gcdD .0       .0        gcdDom₁              = 0
-gcdD .(suc m) .0       (gcdDom₂ {m})         = suc m
-gcdD .0       .(suc n) (gcdDom₃ {n})         = suc n
-gcdD .(suc m) .(suc n) (gcdDom₄ {m} {n} _ h) = gcdD (suc m) (suc n ∸ suc m) h
-gcdD .(suc m) .(suc n) (gcdDom₅ {m} {n} _ h) = gcdD (suc m ∸ suc n) (suc n) h
+gcdD .0        .0        gcdDom₁               = 0
+gcdD .(succ m) .0        (gcdDom₂ {m})         = succ m
+gcdD .0        .(succ n) (gcdDom₃ {n})         = succ n
+gcdD .(succ m) .(succ n) (gcdDom₄ {m} {n} _ h) = gcdD (succ m) (succ n ∸ succ m) h
+gcdD .(succ m) .(succ n) (gcdDom₅ {m} {n} _ h) = gcdD (succ m ∸ succ n) (succ n) h
 
 -- The gcd function is total.
 allGCDDom : ∀ m n → GCDDom m n
@@ -143,19 +143,17 @@ allGCDDom m n = ℕ-lexi P ih m n
   P : ℕ → ℕ → Set
   P m n = GCDDom m n
 
-  helper : ∀ a b → suc (a ∸ b) ≤′ suc a
+  helper : ∀ a b → succ (a ∸ b) ≤′ succ a
   helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
 
   ih : ∀ x y → (∀ x' y' → (x' , y') <₂ (x , y) → P x' y') → P x y
-  ih zero zero    h = gcdDom₁
-  ih zero (suc y) h = gcdDom₃
-  ih (suc x) zero h = gcdDom₂
-
-  ih (suc x) (suc y) h with suc x ≤′? suc y
-  ... | yes p = gcdDom₄ p (h (suc x) (suc y ∸ suc x) (<₂-y (helper y x)))
-
-  ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h (suc x ∸ suc y) (suc y)
-                                          (<₂-x (helper x y)))
+  ih zero     zero     h = gcdDom₁
+  ih zero     (succ y) h = gcdDom₃
+  ih (succ x) zero     h = gcdDom₂
+  ih (succ x) (succ y) h with succ x ≤′? succ y
+  ... | yes p = gcdDom₄ p (h (succ x) (succ y ∸ succ x) (<₂-y (helper y x)))
+  ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h (succ x ∸ succ y) (succ y)
+                                         (<₂-x (helper x y)))
 
 -- The final version of the gcd.
 gcd' : ℕ → ℕ → ℕ
@@ -168,8 +166,8 @@ gcd' m n = gcdD m n (allGCDDom m n)
 -- nested recursive call.
 {-# TERMINATING #-}
 nest : ℕ → ℕ
-nest 0       = 0
-nest (suc n) = nest (nest n)
+nest 0        = 0
+nest (succ n) = nest (nest n)
 
 -- The Bove-Capretta method: The domain predicate
 
@@ -199,16 +197,16 @@ mutual
     nestDomS : ∀ {n} →
                (h₁ : NestDom n) →
                (h₂ : NestDom (nestD n h₁)) →
-               NestDom (suc n)
+               NestDom (succ n)
 
   -- The nest function by structural recursion on the domain predicate.
   nestD : ∀ n → NestDom n → ℕ
-  nestD .0       nestDom0             = 0
-  nestD .(suc n) (nestDomS {n} h₁ h₂) = nestD (nestD n h₁) h₂
+  nestD .0        nestDom0             = 0
+  nestD .(succ n) (nestDomS {n} h₁ h₂) = nestD (nestD n h₁) h₂
 
 nestD-≤′ : ∀ n → (h : NestDom n) → nestD n h ≤′ n
-nestD-≤′ .0       nestDom0             = ≤′-refl
-nestD-≤′ .(suc n) (nestDomS {n} h₁ h₂) =
+nestD-≤′ .0        nestDom0             = ≤′-refl
+nestD-≤′ .(succ n) (nestDomS {n} h₁ h₂) =
   ≤′-trans (≤′-trans (nestD-≤′ (nestD n h₁) h₂) (nestD-≤′ n h₁))
            (≤′-step ≤′-refl)
 
@@ -220,8 +218,8 @@ allNestDom = wfIndℕ-<′ P ih
   P = NestDom
 
   ih : ∀ y → (∀ x → x <′ y → P x) → P y
-  ih zero    rec = nestDom0
-  ih (suc y) rec = nestDomS nd-y (rec (nestD y nd-y) (s≤′s (nestD-≤′ y nd-y)))
+  ih zero     rec = nestDom0
+  ih (succ y) rec = nestDomS nd-y (rec (nestD y nd-y) (s≤′s (nestD-≤′ y nd-y)))
     where
     helper : ∀ x → x <′ y → P x
     helper x Sx≤′y = rec x (≤′-step Sx≤′y)

@@ -1,4 +1,4 @@
-# Repository for the Course 'Dependently Typed Functional Languages - 2011-1'
+# Code for the Course 'Dependently Typed Functional Languages - 2011-1'
 
 Course home page:
 [here](http://www1.eafit.edu.co/asr/courses/dependently-typed-functional-languages/index.html)

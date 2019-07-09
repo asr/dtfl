@@ -6,7 +6,7 @@ test :
 
 html :
 	rm -r -f /tmp/html
-	$(AGDA) --html --html-dir=/tmp/html README.lagda.md
+	$(AGDA) --html --html-dir=/tmp/html README.agda
 
 clean :
 	find -name '*.agdai' | xargs rm -f

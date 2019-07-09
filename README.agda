@@ -1,14 +1,14 @@
 ------------------------------------------------------------------------------
--- Agda code for the course dependently typed functional languages -
--- CB0683/2011-01
+-- Agda code for the course dependently typed functional
+-- languages - 2011-01
 
 -- Course home page:
 -- http://www1.eafit.edu.co/asr/courses/dependently-typed-functional-languages/index.html
 
 ------------------------------------------------------------------------------
 
--- The code has been tested with Agda 2.6.0.1 and the Agda standard
--- library 1.1.
+-- The code has been tested with Agda 2.6.0.1 and Standard
+-- Library 1.1.
 
 module README where
 

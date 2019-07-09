@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
--- Dependently typed functional languages - CB0683/2011-01
+-- Dependently typed functional languages - 2011-01
 
 -- Induction and recursion
 ------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- Example: x + 0 = x using mathematical induction.
 +-rightIdentity₁ : ∀ n → n + zero ≡ n
-+-rightIdentity₁ n = indℕ P P0 is n
++-rightIdentity₁ n = ℕ-ind P P0 is n
   where
   P : ℕ → Set
   P i = i + zero ≡ i
@@ -56,7 +56,7 @@ open import Extra.Relation.Binary.PropositionalEquality
 -- Example: associativy of addition using mathematical induction.
 -- Key: Properly choosing the parameter on which to make the induction.
 +-assoc₁ : ∀ m n o → m + n + o ≡ m + (n + o)
-+-assoc₁ m n o = indℕ P P0 is m
++-assoc₁ m n o = ℕ-ind P P0 is m
   where
   P : ℕ → Set
   P i = i + n + o ≡ i + (n + o)
@@ -77,7 +77,7 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- Example: x + 0 = x using mathematical induction.
 +-rightIdentity₂ : ∀ n → n + zero ≡ n
-+-rightIdentity₂ n = wfIndℕ-< P ih n
++-rightIdentity₂ n = <-wfind P ih n
   where
   P : ℕ → Set
   P x = x + zero ≡ x
@@ -95,7 +95,7 @@ open import Extra.Relation.Binary.PropositionalEquality
 
 -- Example: ++-assoc using induction.
 ++-assoc₁ : {A : Set}(xs ys zs : List A) → (xs ++ ys) ++ zs ≡ xs ++ (ys ++ zs)
-++-assoc₁ {A} xs ys zs = indList P P[] ih xs
+++-assoc₁ {A} xs ys zs = List-ind P P[] ih xs
   where
   P : List A → Set
   P is = (is ++ ys) ++ zs ≡ is ++ (ys ++ zs)

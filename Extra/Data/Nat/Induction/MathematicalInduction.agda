@@ -28,9 +28,9 @@ open import Data.Nat renaming (suc to succ)
 -- * Dependent types
 -- * We have a proof of mathematical induction!
 
-indℕ : (P : ℕ → Set) →
-       P zero →
-       (∀ n → P n → P (succ n)) →
-       ∀ n → P n
-indℕ P P0 istep zero     = P0
-indℕ P P0 istep (succ n) = istep n (indℕ P P0 istep n)
+ℕ-ind : (P : ℕ → Set) →
+        P zero →
+        (∀ n → P n → P (succ n)) →
+        ∀ n → P n
+ℕ-ind P P0 istep zero     = P0
+ℕ-ind P P0 istep (succ n) = istep n (ℕ-ind P P0 istep n)

@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
--- Dependently typed functional languages - CB0683/2011-01
+-- Dependently typed functional languages - 2011-01
 
 -- General recursion
 ------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ gcdD .(succ m) .(succ n) (gcdDom₅ {m} {n} _ h) = gcdD (succ m ∸ succ n) (suc
 
 -- The gcd function is total.
 allGCDDom : ∀ m n → GCDDom m n
-allGCDDom m n = ℕ-lexi P ih m n
+allGCDDom m n = <′₂-ind P ih m n
   where
   P : ℕ → ℕ → Set
   P m n = GCDDom m n
@@ -146,14 +146,14 @@ allGCDDom m n = ℕ-lexi P ih m n
   helper : ∀ a b → succ (a ∸ b) ≤′ succ a
   helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
 
-  ih : ∀ x y → (∀ x' y' → (x' , y') <₂ (x , y) → P x' y') → P x y
+  ih : ∀ x y → (∀ x' y' → (x' , y') <′₂ (x , y) → P x' y') → P x y
   ih zero     zero     h = gcdDom₁
   ih zero     (succ y) h = gcdDom₃
   ih (succ x) zero     h = gcdDom₂
   ih (succ x) (succ y) h with succ x ≤′? succ y
-  ... | yes p = gcdDom₄ p (h (succ x) (succ y ∸ succ x) (<₂-y (helper y x)))
+  ... | yes p = gcdDom₄ p (h (succ x) (succ y ∸ succ x) (<′₂-y (helper y x)))
   ... | no ¬p = gcdDom₅ (x≰′y→x>′y ¬p) (h (succ x ∸ succ y) (succ y)
-                                         (<₂-x (helper x y)))
+                                         (<′₂-x (helper x y)))
 
 -- The final version of the gcd.
 gcd' : ℕ → ℕ → ℕ
@@ -212,7 +212,7 @@ nestD-≤′ .(succ n) (nestDomS {n} h₁ h₂) =
 
 -- The nest function is total.
 allNestDom : ∀ n → NestDom n
-allNestDom = wfIndℕ-<′ P ih
+allNestDom = <′-wfind P ih
   where
   P : ℕ → Set
   P = NestDom

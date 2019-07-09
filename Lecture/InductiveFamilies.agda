@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
--- Dependently typed functional languages - CB0683/2011-01
+-- Dependently typed functional languages - 2011-01
 
 -- Inductive families (datatype families, inductively defined family of sets)
 ------------------------------------------------------------------------------

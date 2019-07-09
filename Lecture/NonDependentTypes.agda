@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
--- Dependently typed functional languages - CB0683/2011-01
+-- Dependently typed functional languages - 2011-01
 
 -- Some non-dependent types used in functional languages
 ------------------------------------------------------------------------------

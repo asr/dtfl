@@ -26,10 +26,10 @@ open import Extra.Data.Nat.Properties
 --              ∀ x. P x
 
 -- From http://code.haskell.org/~dolio/agda-share/induction/.
-wfIndℕ-< : (P : ℕ → Set) →
-           (∀ n → (∀ m → m < n → P m) → P n) →
-           ∀ n → P n
-wfIndℕ-< P ih n = ih n (helper n)
+<-wfind : (P : ℕ → Set) →
+          (∀ n → (∀ m → m < n → P m) → P n) →
+          ∀ n → P n
+<-wfind P ih n = ih n (helper n)
   where
   helper : ∀ n m → m < n → P m
   helper zero     m        ()
@@ -37,10 +37,10 @@ wfIndℕ-< P ih n = ih n (helper n)
   helper (succ n) (succ m) (s≤s Sm≤n) =
     ih (succ m) (λ m' Sm'≤Sm → helper n m' (≤-trans Sm'≤Sm Sm≤n))
 
-wfIndℕ-<′ : (P : ℕ → Set) →
-            (∀ n → (∀ m → m <′ n → P m) → P n) →
-            ∀ n → P n
-wfIndℕ-<′ P ih n = ih n (helper n)
+<′-wfind : (P : ℕ → Set) →
+           (∀ n → (∀ m → m <′ n → P m) → P n) →
+           ∀ n → P n
+<′-wfind P ih n = ih n (helper n)
   where
   helper : ∀ n m → m <′ n → P m
   helper .(succ m) m ≤′-refl             = ih m (helper m)

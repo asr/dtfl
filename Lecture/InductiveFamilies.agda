@@ -6,14 +6,9 @@
 
 -- References:
 
--- [1] Ana Bove and Peter Dybjer. Dependent types at work. In Ana Bove
---     et al., editors. LerNet ALFA Summer School 2008, volume 5520 of
---     LNCS, 2009. pp. 57-99.
+-- Bove, Ana and Dybjer, Peter (2009). Dependent Types at Work.
 
--- [2] Ulf Norell. Dependently typed programming in Agda. In Koopman
---     et al., editors. Advanced Functional Programming 6th
---     International School, AFP 2008, volume 5832 of
---     LNCS. Springer-Verlag, 2009. pp. 230-266.
+-- Norell, Ulf (2009). Dependently Typed Programming in Agda.
 
 {-# OPTIONS --exact-split    #-}
 {-# OPTIONS --guardedness    #-}
@@ -122,9 +117,9 @@ zipR (succ n) (x , xs) (y , ys) = (x , y) , (zipR n xs ys)
 ------------------------------------------------------------------------------
 -- Inductive families or recursive definitions?
 
--- "In the remainder of the notes we will, however, mostly use
+-- 'In the remainder of the notes we will, however, mostly use
 -- inductive families. This should not be taken as a statement that
 -- inductive families are always more convenient than recursive
 -- ones. When both methods are applicable, one needs to carefully
 -- consider how they will be used before choosing the one or the
--- other". [1, p. 70]
+-- other'. [Bove and Dybjer 2009, p. 70]

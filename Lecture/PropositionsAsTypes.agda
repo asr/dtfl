@@ -6,13 +6,10 @@
 
 -- References:
 
--- Ana Bove and Peter Dybjer. Dependent types at work. In Ana Bove et
--- al., editors. LerNet ALFA Summer School 2008, volume 5520 of LNCS,
--- 2009. pp. 57-99.
+-- Bove, Ana and Dybjer, Peter (2009). Dependent Types at Work.
 
--- Morten-Heine Sørensen and Paul Urzyczyn. Lectures on the
--- Curry-Howard isomorphism, volume 149 of Studies in Logic and the
--- Foundations of Mathematics. Elsevier, 2006.
+-- Sørensen, Morten-Heine and Urzyczyn, Paul (2006). Lectures on the
+-- Curry-Howard Isomorphism.
 
 {-# OPTIONS --exact-split              #-}
 {-# OPTIONS --guardedness              #-}
@@ -28,7 +25,7 @@ infix  6 ¬_
 infixr 6 _,_
 infixr 5 _∧_
 infixr 4 _∨_
-infixr 2 _⇒_
+infixr 2 _⊃_
 infixr 2 _↔_
 
 ------------------------------------------------------------------------------
@@ -110,30 +107,30 @@ data ⊤ : Set where
 -- Implication: Function type
 
 --           Γ, A ⊢ B
---  --------------------------- (→I)
+--  --------------------------- (⊃I)
 --           Γ ⊢ A → B
 
-data _⇒_ (A B : Set) : Set where
-  fun : (A → B) → A ⇒ B
+data _⊃_ (A B : Set) : Set where
+  fun : (A → B) → A ⊃ B
 
 --    Γ ⊢ A       Γ ⊢ A → B
---  --------------------------- (→E)
+--  --------------------------- (⊃E)
 --           Γ ⊢ B
 
-app : {A B : Set} → A → (A ⇒ B) → B
+app : {A B : Set} → A → (A ⊃ B) → B
 app a (fun f) = f a
 
--- N.B. Because the function type is built-in in Agda we will use '→'
--- instead of '⇒'.
+-- N.B. Because the function type is built-in in Agda we will use `→`
+-- instead of `⊃`.
 
 ------------------------------------------------------------------------------
--- Negation: ¬ A ≡ A → ⊥
+-- Negation: ¬ A ≔ A → ⊥
 
 ¬_ : Set → Set
 ¬ A = A → ⊥
 
 ------------------------------------------------------------------------------
--- Bi-implication: A ↔ B ≡ (A → B) ∧ (B → A)
+-- Bi-implication: A ↔ B ≔ (A → B) ∧ (B → A)
 
 _↔_ : Set → Set → Set
 A ↔ B = (A → B) ∧ (B → A)
@@ -187,7 +184,7 @@ data ∃ (A : Set)(B : A → Set) : Set where
 ∃E (a , Ba) f = f a Ba
 
 ------------------------------------------------------------------------------
--- The universal quantifier: Pi types
+-- The universal quantifier: Pi-type
 
 --    Γ ⊢ β
 -- --------------- (∀I) (x ∉ FV(Γ))
@@ -203,8 +200,8 @@ data Forall (A : Set)(B : A → Set) : Set where
 dapp : {A : Set}{B : A → Set} → Forall A B → (t : A) → B t
 dapp (dfun f) t = f t
 
--- N.B. Because the Pi types are built-in in Agda we will use
--- '(x : A) → B x' instead of 'Forall'.
+-- N.B. Because the Pi-types are built-in in Agda we will use
+-- `(x : A) → B x` instead of `Forall`.
 
 ------------------------------------------------------------------------------
 -- Examples
@@ -244,7 +241,9 @@ module Examples (A C : Set)(B : A → Set) where
 -- Multi-sorted logic, higher-order logic?
 
 -- Example: The constructive axiom of choice
--- From: Simon Thompson. Type theory & functional programming. 1999, p. 236
+--
+-- From: Thompson, Simon (1999). Type Theory & Functional
+-- Programming. Eprint: www.cs.kent.ac.uk/people/staff/sjt/TTFP/. p. 236
 -- (∀x:A)(∃y:B)P(x, y) → (∃f:A → B)(∀x:A)P(x, f x)
 
 AC : {A B : Set}(P : A → B → Set) →

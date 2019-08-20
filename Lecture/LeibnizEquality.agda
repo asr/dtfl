@@ -21,25 +21,25 @@ open import Extra.Relation.Binary.PropositionalEquality
 -- Introduction
 
 -- Leibniz's law:
--- "Two objects of the same type are equal if and only if they cannot
--- be distinguished by any property." [1, sec. 5.1.3]"
+-- 'Two objects of the same type are equal if and only if they cannot
+-- be distinguished by any property.' [Zhaohui 1994, §5.1.3]
 
 -- Indiscernible: Incapable of being discerned. Not recognizable as distinct
 -- (Merrian Webster).
 
--- Two parts of the Leibniz's law: [2]
+-- Two parts of Leibniz's law: [Forrest 2010]
 -- A. The identity of indiscernibles: ∀P(P x ↔ P y) → x ≐ y.
 
 -- B. The indiscernibility of identicals: x ≐ y → ∀P(P x ↔ P y)
 
--- [1] Zhaohui Luo. Computation and Reasoning. A Type Theory for
---     Computer Science. Oxford University Press, 1994.
+-- Luo, Zhaohui (1994). Computation and Reasoning. A Type Theory for
+-- Computer Science. Oxford University Press.
 
--- [2] Peter Forrest. The Identity of Indiscernibles.
---     http://plato.stanford.edu/entries/identity-indiscernible/, 2010.
+-- Forrest, Peter (2010). The Identity of Indiscernibles.
+-- http://plato.stanford.edu/entries/identity-indiscernible/.
 
 ------------------------------------------------------------------------------
--- Leibniz's equality [1]
+-- Leibniz's equality [Zhaohui 1994]
 
 -- (From Agda/examples/lib/Logic/Leibniz.agda)
 

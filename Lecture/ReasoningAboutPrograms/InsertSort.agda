@@ -51,9 +51,9 @@ sortW (x ∷ xs) = insert x (sortW xs)
 
 -- Strong specification
 
--- Adapted from: Yves Bertot and Pierre Castéran. Interactive Theorem
--- Proving and Program Development. Coq'Art: The Calculus of Inductive
--- Constructions. Springer, 2004.
+-- Adapted from: Bertot, Yves and Castéran, Pierre (2004). Interactive
+-- Theorem Proving and Program Development. Coq’Art: The Calculus of
+-- Inductive Constructions.
 
 -- Auxiliary properties
 

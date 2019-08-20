@@ -23,8 +23,8 @@ open import Extra.Relation.Binary.PropositionalEquality
 ------------------------------------------------------------------------------
 -- Equational reasoning
 
--- From: Graham Hutton. Programming in Haskell. Cambridge University
--- Press, 2007.
+-- From: Hutton, Graham (2016). Programming in
+-- Haskell. 2nd ed. Cambridge University Press. Section 16.1.
 
 -- At school we learn basic algebraic properties of numbers, such as the
 -- fact that multiplication is commutative, addition is associative, and

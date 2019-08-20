@@ -95,8 +95,8 @@ gcd (succ m) (succ n) with (succ m ≤? succ n)
 
 -- The Bove-Capretta method: The domain predicate
 
--- (See Ana Bove and Venanzio Capretta. Modelling general recursion in
--- type theory. Math. Struct. in Comp. Science, 15:671–708, 2005.)
+-- (See: Bove, Ana and Capretta, Venanzio (2005a). Modelling General
+-- Recursion in Type Theory)
 
 -- Domain predicate for the gcd: GCDDom
 
@@ -171,8 +171,8 @@ nest (succ n) = nest (nest n)
 
 -- The Bove-Capretta method: The domain predicate
 
--- (See Ana Bove and Venanzio Capretta. Nested general recursion and
--- partiality in type theory. vol 2152 LNCS. 2001.)
+-- (See: Bove, Ana and Capretta, Venanzio (2001). Nested General
+-- Recursion and Partiality in Type Theory)
 
 -- Domain predicate for the nest: NestDom
 

@@ -5,10 +5,13 @@
 ------------------------------------------------------------------------------
 
 -- References:
--- 1. Benjamin C. Pierce. Types and programming languages. The MIT
---    Press, 2002.
--- 2. Wikipedia article on algebraic data types.
+--
+-- Pierce, Benjamin C. (2002). Types and Programming Languages. MIT
+-- Press.
 
+-- Wikipedia article on algebraic data types.
+
+------------------------------------------------------------------------------
 -- To process an Agda file use C-c C-l.
 
 -- To find out how to write a given character, position the cursor over
@@ -31,17 +34,18 @@ infixr 6 _,_
 infixr 5 _×_
 infixr 4 _+_
 
--- Datatypes are introduced by a 'data' declaration, giving the name and
--- type of the datatype as well as the data constructors and their types.
+-- Datatypes are introduced by a `data` declaration, giving the name
+-- and type of the datatype as well as the data constructors and their
+-- types.
 
--- What is in most programming languages called 'Type' is in Agda for
--- historic reasons called 'Set'.
+-- What is in most programming languages called `Type` is in Agda for
+-- historic reasons called `Set`.
 
 -- The empty (bottom) type: It is the type that has no inhabitants.
-data ⊥ : Set where -- to type ⊥ we type \bot
+data ⊥ : Set where  -- To type ⊥ we type \bot.
 
 -- The unit (top) type: It is the type that allows only one value.
-data ⊤ : Set where  -- to type ⊤ we type \top
+data ⊤ : Set where  -- To type ⊤ we type \top.
   tt : ⊤
 
 -- (Parameterized) polymorphic type: It is a type that takes another
@@ -56,9 +60,8 @@ data _×_ (A B : Set) : Set where
 -- Tuple type: n-ary product type.
 
 -- Record type: A tuple type where each type has an label by which it
--- can be accessed.
--- See:
--- http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.Records
+-- can be accessed. See:
+-- https://agda.readthedocs.io/en/latest/language/record-types.html.
 
 record R (A B C : Set) : Set where
   field
@@ -81,8 +84,8 @@ data WeekDay : Set where
   thursday  : WeekDay
   friday    : WeekDay
 
--- Function types: If 'A B : Set' then 'A → B' is the type of
--- functions of A to B.
+-- Function types: If `A B : Set` then `A → B` is the type of
+-- functions of `A` to `B`.
 
 -- Algebraic data types: Sum of product types.
 

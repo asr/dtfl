@@ -24,7 +24,7 @@ open import Function
 open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
 open import Relation.Nullary
-import Relation.Binary.PreorderReasoning as Pre
+import Relation.Binary.Reasoning.Preorder as Pre
 
 infix 4 _≙_
 

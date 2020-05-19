@@ -144,7 +144,7 @@ allGCDDom m n = <′₂-ind P ih m n
   P m n = GCDDom m n
 
   helper : ∀ a b → succ (a ∸ b) ≤′ succ a
-  helper a b = ≤⇒≤′ (s≤s (n∸m≤n b a))
+  helper a b = ≤⇒≤′ (s≤s (m∸n≤m a b))
 
   ih : ∀ x y → (∀ x' y' → (x' , y') <′₂ (x , y) → P x' y') → P x y
   ih zero     zero     h = gcdDom₁

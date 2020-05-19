@@ -7,8 +7,8 @@
 
 ------------------------------------------------------------------------------
 
--- The code has been tested with Agda 2.6.0.1 and Standard
--- Library 1.1.
+-- The code has been tested with Agda 2.6.1 and the standard
+-- library 1.3.
 
 module README where
 

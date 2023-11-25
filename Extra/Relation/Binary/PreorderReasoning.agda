@@ -8,13 +8,17 @@
 -- proof, and _∎, which ends a proof. In fact, these combinators work
 -- for arbitrary preorders.
 
-{-# OPTIONS --exact-split              #-}
-{-# OPTIONS --guardedness              #-}
-{-# OPTIONS --no-sized-types           #-}
+-- Common options
+{-# OPTIONS --double-check   #-}
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+
+-- Other options
 {-# OPTIONS --no-universe-polymorphism #-}
 {-# OPTIONS --safe                     #-}
-{-# OPTIONS --warning=all              #-}
-{-# OPTIONS --warning=error            #-}
 {-# OPTIONS --without-K                #-}
 
 module Extra.Relation.Binary.PreorderReasoning where

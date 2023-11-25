@@ -2,6 +2,19 @@
 -- All the DTFL modules
 ------------------------------------------------------------------------------
 
+-- Common options
+{-# OPTIONS --double-check   #-}
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+-- {-# OPTIONS --safe                     #-}
+-- {-# OPTIONS --without-K                #-}
+
 module Everything where
 
 -- Extra stuff

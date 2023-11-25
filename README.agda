@@ -7,8 +7,21 @@
 
 ------------------------------------------------------------------------------
 
--- The code has been tested with Agda 2.6.1 and the standard
--- library 1.3.
+-- The code has been tested with Agda 2.6.4 and the standard
+-- library 1.7.3.
+
+-- Common options
+{-# OPTIONS --double-check   #-}
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+-- {-# OPTIONS --safe                     #-}
+-- {-# OPTIONS --without-K                #-}
 
 module README where
 

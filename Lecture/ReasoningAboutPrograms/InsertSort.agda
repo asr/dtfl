@@ -4,13 +4,18 @@
 -- Example: Weak/strong specification of sorting a list (using insert sort)
 ------------------------------------------------------------------------------
 
+-- Common options
+{-# OPTIONS --double-check   #-}
 {-# OPTIONS --exact-split    #-}
 {-# OPTIONS --guardedness    #-}
 {-# OPTIONS --no-sized-types #-}
-{-# OPTIONS --safe           #-}
 {-# OPTIONS --warning=all    #-}
 {-# OPTIONS --warning=error  #-}
--- {-# OPTIONS --without-K      #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe #-}
+-- {-# OPTIONS --without-K #-}
 
 module Lecture.ReasoningAboutPrograms.InsertSort where
 

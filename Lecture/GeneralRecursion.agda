@@ -4,21 +4,24 @@
 -- General recursion
 ------------------------------------------------------------------------------
 
+-- Common options
+{-# OPTIONS --double-check   #-}
 {-# OPTIONS --exact-split    #-}
 {-# OPTIONS --guardedness    #-}
 {-# OPTIONS --no-sized-types #-}
-
--- We cannot use the `safe` option because we are using the
--- `TERMINATING` flag.
--- {-# OPTIONS --safe #-}
-
 {-# OPTIONS --warning=all    #-}
 {-# OPTIONS --warning=error  #-}
-{-# OPTIONS --without-K      #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+-- We cannot use the `safe` option because we are using the
+-- `TERMINATING` flag.
+-- {-# OPTIONS --safe  #-}
+{-# OPTIONS --without-K #-}
 
 module Lecture.GeneralRecursion where
 
-open import Data.List
+open import Data.List hiding (merge)
 open import Data.Nat renaming (suc to succ) hiding (_≤′?_ )
 open import Data.Nat.Properties hiding (_≤′?_ ; ≤′-trans )
 open import Data.Product

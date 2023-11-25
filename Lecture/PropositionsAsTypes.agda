@@ -11,13 +11,18 @@
 -- Sørensen, Morten-Heine and Urzyczyn, Paul (2006). Lectures on the
 -- Curry-Howard Isomorphism.
 
-{-# OPTIONS --exact-split              #-}
-{-# OPTIONS --guardedness              #-}
-{-# OPTIONS --no-sized-types           #-}
-{-# OPTIONS --no-universe-polymorphism #-}
-{-# OPTIONS --warning=all              #-}
-{-# OPTIONS --warning=error            #-}
-{-# OPTIONS --without-K                #-}
+-- Common options
+{-# OPTIONS --double-check   #-}
+{-# OPTIONS --exact-split    #-}
+{-# OPTIONS --guardedness    #-}
+{-# OPTIONS --no-sized-types #-}
+{-# OPTIONS --warning=all    #-}
+{-# OPTIONS --warning=error  #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+-- {-# OPTIONS --safe      #-}
+{-# OPTIONS --without-K #-}
 
 module Lecture.PropositionsAsTypes where
 

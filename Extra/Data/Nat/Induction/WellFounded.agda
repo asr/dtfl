@@ -2,13 +2,18 @@
 -- Well-founded induction on the natural numbers
 ------------------------------------------------------------------------------
 
+-- Common options
+{-# OPTIONS --double-check   #-}
 {-# OPTIONS --exact-split    #-}
 {-# OPTIONS --guardedness    #-}
 {-# OPTIONS --no-sized-types #-}
-{-# OPTIONS --safe           #-}
 {-# OPTIONS --warning=all    #-}
 {-# OPTIONS --warning=error  #-}
-{-# OPTIONS --without-K      #-}
+
+-- Other options
+-- {-# OPTIONS --no-universe-polymorphism #-}
+{-# OPTIONS --safe      #-}
+{-# OPTIONS --without-K #-}
 
 module Extra.Data.Nat.Induction.WellFounded where
 

@@ -7,7 +7,7 @@
 
 ------------------------------------------------------------------------------
 
--- The code has been tested with Agda 2.6.4 and the standard
+-- The code has been tested with Agda 2.6.4.1 and the standard
 -- library 1.7.3.
 
 -- Common options

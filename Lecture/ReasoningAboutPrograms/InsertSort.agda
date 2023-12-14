@@ -133,7 +133,7 @@ xs ≙ ys = (n : ℕ) → occ n xs ≡ occ n ys
 ≙-Preorder = record
   { Carrier    = List ℕ
   ;  _≈_       = _≙_
-  ;  _∼_       = _≙_
+  ;  _≲_       = _≙_
   ; isPreorder = ≙-isPreorder
   }
 
